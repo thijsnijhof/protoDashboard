@@ -64,5 +64,20 @@ module.exports = {
         }
       }
     ]
-  }
+  //   loaders:[
+  //     {
+  //       test: />.vue$/,
+  //       loader:'vue'
+  //     },
+  //     {
+  //       test:/>.s[a|c]ss$/,
+  //       loader:'style!css!sass'
+  //     }
+  //   ]
+  // }
+  // vue: {
+  //   loaders:{
+  //     sccs:'style!css!sass'
+  //   }
+  // }
 }

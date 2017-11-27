@@ -1,23 +1,37 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <app-header></app-header>
     <router-view/>
   </div>
 </template>
 
 <script>
+  import Header from './components/static/Header.vue';
+
 export default {
-  name: 'app'
+  name: 'app',
+  components:{
+    appHeader: Header
+  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  /*@import 'main.scss';*/
 #app {
+  display:flex;
+  flex-direction:column;
+  /*justify-content: center;*/
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height:100vh;
+  background: #555; /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient( #89ecff, #555); /* For Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(#89ecff, #555); /* For Opera 11.1 to 12.0 */
+  background: -moz-radial-gradient(#89ecff, #555); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(#89ecff, #555); /* Standard syntax */
 }
 </style>
