@@ -26,6 +26,7 @@
     border:none;
     margin-bottom:20px;
   }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -39,6 +40,7 @@
     border-radius:3px;
     padding:20px;
     background: #fff;
+    box-shadow: 2px 2px 2px #222;
   }
 
   .login-input {

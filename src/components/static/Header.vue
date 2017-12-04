@@ -16,9 +16,10 @@
     max-height: 50px;
     flex-direction: row;
     background: #fff;
-    margin-bottom: 10%;
+    border-bottom:1px solid deepskyblue;
     justify-content: space-between;
     align-items:center;
+    box-shadow: 2px 2px #222;
   }
 
   button {
