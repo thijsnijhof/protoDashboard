@@ -79,5 +79,5 @@ module.exports = {
   //   loaders:{
   //     sccs:'style!css!sass'
   //   }
-  // }
+  }
 }

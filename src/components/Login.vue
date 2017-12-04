@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <form action="" class="login-container">
-      <h1>Login</h1>
+      <h1>LOGIN</h1>
       <hr>
       <input class="login-input" type="text" placeholder="Username">
       <input type="password" class="login-input" placeholder="Password">
-      <input type="submit" value="Login" class="login-button">
+      <input type="submit" value="LOGIN" class="login-button">
     </form>
   </div>
 </template>
@@ -20,9 +20,9 @@
   }
 
   hr {
-    background-color:dodgerblue;
+    background-color:deepskyblue;
     width:100%;
-    height: 1px;
+    height: 2px;
     border:none;
     margin-bottom:20px;
   }
@@ -56,16 +56,16 @@
 
   .login-button {
     display:flex;
-    flex: 1 0 25px;
+    flex: 1 0 45px;
     font-size:large;
     font-weight:bold;
     border: none;
     margin-top:5px;
     padding-top:5px;
-    padding-bottom:25px;
+    /*padding-bottom:25px;*/
     align-items:center;
     justify-content: center;
-    background:dodgerblue;
+    background:deepskyblue;
     color:#fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
