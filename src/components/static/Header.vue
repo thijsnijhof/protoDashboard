@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>AVAILABLE DEVICES</h1>
-    <button>LOGOUT</button>
+    <button><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>
   </section>
 </template>
 
@@ -23,6 +23,7 @@
   }
 
   button {
+    display:flex;
     height: 50%;
     width:10%;
     min-width:75px;
@@ -32,10 +33,17 @@
     border:2px solid deepskyblue;
     border-radius:3px;
     color: deepskyblue;
+    flex-wrap:nowrap;
+    justify-content: flex-start;
+    align-items:center;
   }
   h1 {
     margin:2%;
     font-weight:100;
     font-size:large;
+  }
+
+  .icon {
+    margin-right:5px;
   }
 </style>

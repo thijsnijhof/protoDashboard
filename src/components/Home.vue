@@ -40,5 +40,7 @@ export default {
    justify-content: flex-start;
    align-items:flex-start;
    flex-wrap: wrap;
+   margin-right:5%;
+   margin-left:5%;
  }
 </style>
