@@ -1,22 +1,35 @@
 <template>
   <div class="container">
-    <form action="" class="login-container">
+    <form @submit.prevent="onSubmit" class="login-container">
       <h1>LOGIN</h1>
       <hr>
-      <input class="login-input" type="text" placeholder="Username">
-      <input type="password" class="login-input" placeholder="Password">
+      <input class="login-input" type="text" v-model="username" placeholder="Username">
+      <input type="password" class="login-input" v-model="password" placeholder="Password">
       <input type="submit" value="LOGIN" class="login-button">
     </form>
   </div>
 </template>
 
 <script>
-  import Particle from 'particle-api-js';
-  const particle = new Particle();
+//  import Particle from 'particle-api-js';
+//  const particle = new Particle();
 
   export default {
+    data(){
+      return {
+        username:'',
+        password:''
+      }
+    },
     methods: {
-
+      onSubmit(){
+        const formData = {
+          username:this.username,
+          password:this.password,
+        }
+        console.log(formData)
+      this.$store.dispatch('login', {username:formData.username,password:formData.password})
+      }
     }
   }
 
