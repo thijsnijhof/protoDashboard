@@ -1,34 +1,35 @@
 <template>
   <div class="container">
-    <form @submit.prevent="onSubmit" class="login-container">
+    <form @submit.prevent="onSubmit({username, password})" class="login-container">
       <h1>LOGIN</h1>
       <hr>
       <input class="login-input" type="text" v-model="username" placeholder="Username">
       <input type="password" class="login-input" v-model="password" placeholder="Password">
-      <input type="submit" value="LOGIN" class="login-button">
+      <button type="submit" class="login-button">LOGIN</button>
     </form>
   </div>
 </template>
 
 <script>
-//  import Particle from 'particle-api-js';
-//  const particle = new Particle();
+  //  import Particle from 'particle-api-js';
+  //  const particle = new Particle();
 
   export default {
-    data(){
+    data() {
       return {
-        username:'',
-        password:''
+        username: '',
+        password: ''
       }
     },
     methods: {
-      onSubmit(){
+      onSubmit() {
+        // assign the user input
         const formData = {
           username:this.username,
           password:this.password,
-        }
-        console.log(formData)
-      this.$store.dispatch('login', {username:formData.username,password:formData.password})
+        };
+        // dispatches the login action in the store
+        this.$store.dispatch('login', {username: formData.username, password: formData.password})
       }
     }
   }
@@ -36,16 +37,16 @@
 </script>
 
 <style scoped>
-  h1  {
-    font-size:large;
+  h1 {
+    font-size: large;
   }
 
   hr {
-    background-color:deepskyblue;
-    width:100%;
+    background-color: deepskyblue;
+    width: 100%;
     height: 2px;
-    border:none;
-    margin-bottom:20px;
+    border: none;
+    margin-bottom: 20px;
   }
 
   .container {
@@ -56,10 +57,10 @@
   }
 
   .login-container {
-    display:flex;
-    flex-direction:column;
-    border-radius:3px;
-    padding:20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    padding: 20px;
     background: #fff;
     box-shadow: 2px 2px 2px #222;
   }
@@ -74,22 +75,22 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
     font-size: medium;
-    background:#fff;
+    background: #fff;
   }
 
   .login-button {
-    display:flex;
+    display: flex;
     flex: 1 0 45px;
-    font-size:large;
-    font-weight:bold;
+    font-size: large;
+    font-weight: bold;
     border: none;
-    margin-top:5px;
-    padding-top:5px;
+    margin-top: 5px;
+    padding-top: 5px;
     /*padding-bottom:25px;*/
-    align-items:center;
+    align-items: center;
     justify-content: center;
-    background:deepskyblue;
-    color:#fff;
+    background: deepskyblue;
+    color: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
