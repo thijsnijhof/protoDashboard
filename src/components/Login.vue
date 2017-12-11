@@ -11,9 +11,6 @@
 </template>
 
 <script>
-  //  import Particle from 'particle-api-js';
-  //  const particle = new Particle();
-
   export default {
     data() {
       return {
@@ -25,10 +22,10 @@
       onSubmit() {
         // assign the user input
         const formData = {
-          username:this.username,
-          password:this.password,
+          username: this.username,
+          password: this.password,
         };
-        // dispatches the login action in the store
+        // dispatches the login action from the store
         this.$store.dispatch('login', {username: formData.username, password: formData.password})
       }
     }

@@ -54,7 +54,6 @@
     border: none;
     font-weight: 100;
     color: #999;
-
   }
 
   #slidecontainer {
@@ -103,7 +102,6 @@
     margin-right: 5%;
     margin-left: 5%;
     flex-wrap: wrap;
-
   }
 
   .dashboard-block {
@@ -119,7 +117,6 @@
     background-color: deepskyblue;
     align-items: center;
     justify-content: space-between;
-
   }
 
   .icon {
