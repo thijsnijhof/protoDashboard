@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import Particle from 'particle-api-js';
+import Cookies from 'js-cookie';
+import createPersistedState from 'vuex-persistedstate';
 import router from '../router';
 
 Vue.use(Vuex);
@@ -13,13 +14,27 @@ export const store = new Vuex.Store({
     isLoggedIn: false,
     accessToken: null
   },
+  plugins: [
+    // persist the accessToken to localStorage
+    // https://github.com/robinvdvleuten/vuex-persistedstate
+    createPersistedState({
+      storage: {
+        getItem: key => Cookies.get(key),
+        setItem: (key, value) => Cookies.set(key, value, {expires: 7 , secure:true}),
+        removeItem: key => Cookies.remove(key)
+      }
+    })
+  ],
   mutations: {
     authUser(state, userData) {
       //store the accesToken in the store
       state.accessToken = userData.token
     }
   },
-  getters: {},
+  getters: {
+    // can be use to show data
+    // fetch and show
+  },
   actions: {
     // authData = payload
     // commit, commits the context to the mutation, changing the state
