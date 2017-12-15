@@ -2,7 +2,11 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+
+// import store and router and inject them in the root instance
+// they can now be accessed with $store and $router
 import router from './router'
+import { store } from './store/store';
 
 Vue.config.productionTip = false
 
@@ -10,6 +14,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

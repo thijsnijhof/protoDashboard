@@ -21,6 +21,11 @@ export default {
   },
   components: {
     appDevice: Device
+  },
+  computed:{
+    listDevices(){
+      return this.$store.getters.fetchDevices();
+    }
   }
 }
 </script>

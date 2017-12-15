@@ -1,27 +1,29 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/home',
-      name: 'Home',
-      component: Home
-    },
-    {
-      path:'/',
-      name: 'Login',
-      component:Login
-    },
-    {
-      path:'/dashboard',
-      name:'Dashboard',
-      component:Dashboard
-    }
-  ]
-})
+// declare the different route paths
+
+const routes = [
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  }
+]
+
+export default new VueRouter({mode: 'history', routes})
