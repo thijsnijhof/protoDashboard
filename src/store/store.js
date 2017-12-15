@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
     createPersistedState({
       storage: {
         getItem: key => Cookies.get(key),
-        setItem: (key, value) => Cookies.set(key, value, {expires: 7 , secure:true}),
+        setItem: (key, value) => Cookies.set(key, value, {expires: 7 , secure:false}),
         removeItem: key => Cookies.remove(key)
       }
     })
@@ -29,11 +29,25 @@ export const store = new Vuex.Store({
     authUser(state, userData) {
       //store the accesToken in the store
       state.accessToken = userData.token
+      console.log(userData.token)
+      console.log(state.accessToken)
+    },
+    logoutUser(){
+      Cookies.remove('accessToken','userId','token');
     }
   },
   getters: {
-    // can be use to show data
+    // can be used to show data
     // fetch and show
+    fetchDevices(state){
+      const particle = new Particle();
+      const accessToken = state.accessToken;
+      const devicesList = particle.listDevices({auth:accessToken});
+      devicesList.then(devices => {
+        console.log('Devices: ', devices)
+      })
+        .catch(error => console.log('List devices failed ', error))
+    }
   },
   actions: {
     // authData = payload
@@ -53,6 +67,11 @@ export const store = new Vuex.Store({
         })
         // catch errors
         .catch(error => console.log('failed to login', error))
+    },
+    logout({commit}){
+      commit('logoutUser');
+      router.push('/')
     }
   }
 });
+// HistorMonodekDektInEenLaagWit

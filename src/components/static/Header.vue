@@ -1,12 +1,18 @@
 <template>
   <section>
     <h1>AVAILABLE DEVICES</h1>
-    <button><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>
+    <button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>
   </section>
 </template>
 
 <script>
-
+export default {
+  methods :{
+    onLogout(){
+      this.$store.dispatch('logout')
+    }
+  }
+}
 </script>
 
 <style scoped>
