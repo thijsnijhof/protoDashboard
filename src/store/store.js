@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
     isLoggedIn: false,
     accessToken: null,
     data: {},
-    singleDevice: {}
+    singleDevice: {},
+    singleDeviceData:{}
   },
   plugins: [
     // persist the accessToken to localStorage
@@ -57,6 +58,9 @@ export const store = new Vuex.Store({
     },
     singleDevice: state => {
       return state.singleDevice;
+    },
+    singleDeviceData: state => {
+      return state.singleDeviceData;
     }
   },
   actions: {

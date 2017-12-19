@@ -15,6 +15,9 @@
     components: {
       appHeader: Header,
       appFooter: Footer
+    },
+    computed: {
+
     }
   }
 </script>
