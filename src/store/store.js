@@ -57,10 +57,10 @@ export const store = new Vuex.Store({
       })
         .then( data =>{
             let deviceData = data.body.result;
-            let deviceKeys = data.body;
+            let deviceObject = data.body;
             // , JSON.stringify(deviceData)
             console.log('DeviceData is: ', deviceData);
-          console.log('DeviceData is: ', deviceKeys);
+          console.log('DeviceObject is: ', deviceObject);
 
 
         });
