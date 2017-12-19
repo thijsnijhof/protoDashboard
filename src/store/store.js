@@ -12,7 +12,9 @@ export const store = new Vuex.Store({
   state: {
     // initial state
     isLoggedIn: false,
-    accessToken: null
+    accessToken: null,
+    data: {},
+    singleDevice: {}
   },
   plugins: [
     // persist the accessToken to localStorage
@@ -20,7 +22,7 @@ export const store = new Vuex.Store({
     createPersistedState({
       storage: {
         getItem: key => Cookies.get(key),
-        setItem: (key, value) => Cookies.set(key, value, {expires: 7 , secure:false}),
+        setItem: (key, value) => Cookies.set(key, value, {expires: 7, secure: false}),
         removeItem: key => Cookies.remove(key)
       }
     })
@@ -32,21 +34,29 @@ export const store = new Vuex.Store({
       console.log(userData.token)
       console.log(state.accessToken)
     },
-    logoutUser(){
-      Cookies.remove('accessToken','userId','token');
+    logoutUser(accessToken) {
+      Cookies.remove('accessToken', 'userId', 'token');
+      console.log(accessToken);
+    },
+    addDevices(state, newData) {
+      state.data = newData;
+      console.log('addDevices ', state);
+      console.log('newData', newData);
+      console.log('state data ', state.data);
+    },
+    singleDevice(state, device) {
+      state.singleDevice = device;
+      console.log(state.singleDevice);
     }
   },
   getters: {
-    // can be used to show data
-    // fetch and show
-    fetchDevices(state){
-      const particle = new Particle();
-      const accessToken = state.accessToken;
-      const devicesList = particle.listDevices({auth:accessToken});
-      devicesList.then(devices => {
-        console.log('Devices: ', devices)
-      })
-        .catch(error => console.log('List devices failed ', error))
+    // the getters can be listened to in other components
+    // when the data changes, the data in the components changes too
+    data: state => {
+      return state.data;
+    },
+    singleDevice: state => {
+      return state.singleDevice;
     }
   },
   actions: {
@@ -68,9 +78,24 @@ export const store = new Vuex.Store({
         // catch errors
         .catch(error => console.log('failed to login', error))
     },
-    logout({commit}){
-      commit('logoutUser');
+    logout({commit}, accessToken) {
+      commit('logoutUser', accessToken);
       router.push('/')
+    },
+    // can be used to show data
+    // fetch and show
+    fetchDevices({commit}) {
+      const particle = new Particle();
+      const accessToken = this.state.accessToken;
+      particle.listDevices({auth: accessToken})
+        .then(devices => {
+          commit('addDevices', devices.body);
+        })
+        .catch(error => console.log('List devices failed ', error))
+    },
+    selectedDevice({commit}, device) {
+      commit('singleDevice', device);
+      router.push('/dashboard');
     }
   }
 });
