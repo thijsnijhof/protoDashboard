@@ -1,6 +1,7 @@
 <template>
   <section>
     <h1>AVAILABLE DEVICES</h1>
+    <h1>{{$route.name}}</h1>
     <button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>
   </section>
 </template>

@@ -31,23 +31,43 @@ export const store = new Vuex.Store({
   mutations: {
     authUser(state, userData) {
       //store the accesToken in the store
-      state.accessToken = userData.token
-      console.log(userData.token)
-      console.log(state.accessToken)
+      state.accessToken = userData.token;
+      state.isLoggedIn = true;
+      console.log(userData.token);
+      console.log(state.accessToken);
     },
-    logoutUser(accessToken) {
+    logoutUser(state,accessToken) {
       Cookies.remove('accessToken', 'userId', 'token');
+      state.isLoggedIn = false;
       console.log(accessToken);
     },
     addDevices(state, newData) {
       state.data = newData;
-      console.log('addDevices ', state);
-      console.log('newData', newData);
-      console.log('state data ', state.data);
+      // console.log('addDevices ', state);
+      // console.log('newData', newData);
+      // console.log('state data ', state.data);
     },
     singleDevice(state, device) {
       state.singleDevice = device;
+      const particle = new Particle();
+      particle.getVariable({
+        deviceId: state.singleDevice,
+        name: 'getMSTRSet',
+        auth: state.accessToken
+      })
+        .then( data =>{
+            let deviceData = data.body.result;
+            let deviceKeys = data.body;
+            // , JSON.stringify(deviceData)
+            console.log('DeviceData is: ', deviceData);
+          console.log('DeviceData is: ', deviceKeys);
+
+
+        });
       console.log(state.singleDevice);
+    },
+    singleDeviceData(state,device){
+
     }
   },
   getters: {
@@ -61,6 +81,9 @@ export const store = new Vuex.Store({
     },
     singleDeviceData: state => {
       return state.singleDeviceData;
+    },
+    isLoggedIn: state => {
+      return state.isLoggedIn;
     }
   },
   actions: {

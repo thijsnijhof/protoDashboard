@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header></app-header>
+    <app-header v-show="isLoggedIn"></app-header>
     <router-view/>
     <app-footer class="sticky"></app-footer>
   </div>
@@ -9,6 +9,7 @@
 <script>
   import Header from './components/static/Header.vue';
   import Footer from './components/static/Footer.vue';
+  import {mapState} from 'vuex';
 
   export default {
     name: 'app',
@@ -16,9 +17,9 @@
       appHeader: Header,
       appFooter: Footer
     },
-    computed: {
-
-    }
+    computed: mapState([
+      'isLoggedIn'
+    ])
   }
 </script>
 

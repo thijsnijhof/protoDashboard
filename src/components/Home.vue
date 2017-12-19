@@ -7,8 +7,7 @@
 
 <script>
   import Device from './listitems/Device.vue';
-  import {mapState} from 'vuex';
-
+//  import {mapState} from 'vuex';
   export default {
     data() {
       return {

@@ -23,7 +23,9 @@ export default {
   methods: {
     selectDevice(device){
       const selectedDeviceId = device.id;
+      const selectedDeviceData = device;
       console.log('selectedDeviceId is: ',selectedDeviceId);
+      console.log('selectedDeviceData is: ', selectedDeviceData);
       this.$store.dispatch('selectedDevice', selectedDeviceId)
     }
   }
