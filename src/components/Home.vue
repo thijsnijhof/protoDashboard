@@ -1,19 +1,12 @@
 <template>
   <div class="container">
-    <!--{{listDevices}}-->
     <app-device v-for="device in devices" :device="device" :key="device.id" class="list-style"></app-device>
   </div>
 </template>
 
 <script>
   import Device from './listitems/Device.vue';
-//  import {mapState} from 'vuex';
   export default {
-    data() {
-      return {
-        msg: 'Welcome to the home page'
-      }
-    },
     components: {
       appDevice: Device
     },
@@ -22,12 +15,6 @@
         console.log('getters data', this.$store.getters.data);
         return this.$store.getters.data;
       }
-    },
-
-    created() {
-//      console.log('hi im created');
-//      return this.$store.getters.fetchDevices();
-//      console.log(this.$store.dispatch('fetchDevices'))
     }
   }
 </script>

@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Cookies from 'js-cookie';
 import createPersistedState from 'vuex-persistedstate';
 import router from '../router';
+import settingsArray from './settingsArray';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export const store = new Vuex.Store({
     accessToken: null,
     data: {},
     singleDevice: {},
-    singleDeviceData:{}
+    singleDeviceData:[],
+    settingsArray
   },
   plugins: [
     // persist the accessToken to localStorage
@@ -30,7 +32,7 @@ export const store = new Vuex.Store({
   ],
   mutations: {
     authUser(state, userData) {
-      //store the accesToken in the store
+      //store the accessToken in the store
       state.accessToken = userData.token;
       state.isLoggedIn = true;
       console.log(userData.token);
@@ -56,15 +58,17 @@ export const store = new Vuex.Store({
         auth: state.accessToken
       })
         .then( data =>{
-            let deviceData = data.body.result;
-            let deviceObject = data.body;
-            // , JSON.stringify(deviceData)
-            console.log('DeviceData is: ', deviceData);
-          console.log('DeviceObject is: ', deviceObject);
-
-
+          let deviceCSV = data.body.result;
+          let deviceData = deviceCSV.split(",");
+          // let combinedArray = {};
+          let combinedArray = [];
+          for(let result in deviceData){
+            // combinedArray[settingsArray[result]]=deviceData[result];
+            combinedArray.push({name:settingsArray[result], value:deviceData[result]});
+          }
+          state.singleDeviceData = combinedArray;
+          console.log('CombinedArray after is: ', combinedArray);
         });
-      console.log(state.singleDevice);
     },
     singleDeviceData(state,device){
 

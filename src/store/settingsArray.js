@@ -1,0 +1,43 @@
+// export default [
+//   {ProductRange:null},
+//   {ProductId:null},
+//   {useVoltSense:null},
+//   {hasRockerSwitch:null},
+//   {hasPushButton:null},
+//   {hasPIRSensor:null},
+//   {hasRTCBattery:null},
+//   {buttonPin:null},
+//   {FirmwareVersion:null},
+//   {MainLocationName:null},
+//   {LocationLatitude:null},
+//   {LocationLongitude:null},
+//   {WiFiMode:null},
+//   {AppMode:null},
+//   {MasterSlaveMode:null},
+//   {MasterId:null},
+//   {EffectXOffset:null},
+//   {EffectYOffset:null},
+//   {EffectTimeOffset:null}
+// ]
+
+export default [
+  "ProductRange",
+  "ProductId",
+  "useVoltSense",
+  "hasRockerSwitch",
+  "hasPushButton",
+  "hasPIRSensor",
+  "hasRTCBattery",
+  "buttonPin",
+  "FirmwareVersion",
+  "MainLocationName",
+  "LocationLatitude",
+  "LocationLongitude",
+  "WiFiMode",
+  "AppMode",
+  "MasterSlaveMode",
+  "MasterId",
+  "EffectXOffset",
+  "EffectYOffset",
+  "EffectTimeOffset"
+]
