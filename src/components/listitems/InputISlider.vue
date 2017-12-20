@@ -1,6 +1,6 @@
 <template>
   <div id="slidecontainer">
-    <input type="range" min="1" max="255" value="50" class="slider" id="myRange">
+    <input type="range" min="0" max="9999" value="50" class="slider" id="myRange">
   </div>
 </template>
 
@@ -47,17 +47,5 @@
     background: #ffffff;
     cursor: pointer;
     margin-top: -5px;
-  }
-  .table-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px 0 10px;
-    background-color: #fff;
-  }
-
-  .edit {
-    display: flex;
-    align-items: center;
   }
 </style>
