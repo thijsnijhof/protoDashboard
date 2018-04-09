@@ -21,7 +21,7 @@
         <th>Value</th>
         <th>Edit</th>
       </tr>
-      <app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key"></app-table-item>
+      <app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key" :key="singleDevice.id"></app-table-item>
     </table>
 
   </section>

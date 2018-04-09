@@ -37,6 +37,8 @@ export const store = new Vuex.Store({
       state.isLoggedIn = true;
       console.log(userData.token);
       console.log(state.accessToken);
+      console.log(state.data);
+      console.log(state.singleDevice);
     },
     logoutUser(state,accessToken) {
       Cookies.remove('accessToken', 'userId', 'token');
@@ -47,7 +49,7 @@ export const store = new Vuex.Store({
       state.data = newData;
       // console.log('addDevices ', state);
       // console.log('newData', newData);
-      // console.log('state data ', state.data);
+      console.log('state data ', state.data);
     },
     singleDevice(state, device) {
       state.singleDevice = device;
@@ -101,8 +103,10 @@ export const store = new Vuex.Store({
       })
       // commit the authUser mutation
         .then(res => {
+          console.log("res: ", res.body);
           commit('authUser', {
             token: res.body.access_token
+            // token:'ad7f178446ed942379772e3900df4f73fb756160'
           });
           router.push('/home')
         })
@@ -118,8 +122,11 @@ export const store = new Vuex.Store({
     fetchDevices({commit}) {
       const particle = new Particle();
       const accessToken = this.state.accessToken;
+      // const testdev = particle.listDevices({auth: accessToken});
+      // testdev.then(function(devices){console.log('Devices: ', devices)});
       particle.listDevices({auth: accessToken})
         .then(devices => {
+          console.log('Devices',devices);
           commit('addDevices', devices.body);
         })
         .catch(error => console.log('List devices failed ', error))

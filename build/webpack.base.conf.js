@@ -1,4 +1,4 @@
-'use strict'
+// 'use strict'
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -80,4 +80,4 @@ module.exports = {
   //     sccs:'style!css!sass'
   //   }
   }
-}
+};
