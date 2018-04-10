@@ -15,6 +15,9 @@
         console.log('getters data', this.$store.getters.data);
         return this.$store.getters.data;
       }
+    },
+    created:function() {
+        this.$store.dispatch('fetchDevices')
     }
   }
 </script>
