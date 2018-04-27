@@ -1,13 +1,19 @@
 <template>
+  <v-ons-page>
   <div class="container">
-    <form @submit.prevent="onSubmit({username, password})" class="login-container">
+    <form @submit.prevent="onSubmit({username, password})" class="login-container" ref="indexform" id="indexform">
       <h1>LOGIN</h1>
       <hr>
-      <input class="login-input" type="text" v-model="username" placeholder="Username">
-      <input type="password" class="login-input" v-model="password" placeholder="Password">
+      <v-ons-input type="text" v-model="username" placeholder="Username" modifier="material"></v-ons-input>
+      <v-ons-input type="password" v-model="password" placeholder="Password" modifier="material"></v-ons-input>
+      <!--<v-ons-button modifier="large" type="submit">LOGIN</v-ons-button>-->
+
+      <!--<v-ons-input class="login-input" type="text" v-model="username" placeholder="Username"></v-ons-input>-->
+      <!--<v-ons-input type="password" class="login-input" v-model="password" placeholder="Password"></v-ons-input>-->
       <button type="submit" class="login-button">LOGIN</button>
     </form>
   </div>
+  </v-ons-page>
 </template>
 
 <script>
@@ -26,6 +32,7 @@
           password: this.password,
         };
         // dispatches the login action from the store
+//        this.$store.dispatch('navigator/login', {username: formData.username, password: formData.password})
         this.$store.dispatch('login', {username: formData.username, password: formData.password})
       }
     }

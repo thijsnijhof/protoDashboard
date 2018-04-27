@@ -25,6 +25,33 @@
     </table>
 
   </section>
+
+  <!--<section class="dashboard-container">-->
+    <!--<div class="dashboard-header">-->
+      <!--<section class="devices-list">-->
+        <!--<label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>-->
+        <!--<select name="devices" id="devices">-->
+          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+        <!--</select>-->
+      <!--</section>-->
+      <!--<button class="bulk-edit">BULK EDIT</button>-->
+      <!--<section class="collapse-container">-->
+        <!--<p class="collapse-all">COLLAPSE ALL</p>-->
+        <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
+      <!--</section>-->
+    <!--</div>-->
+
+    <!--<table class="dashboard-block">-->
+      <!--<tr class="table-head">-->
+        <!--<th>SettingName</th>-->
+        <!--<th>Value</th>-->
+        <!--<th>Edit</th>-->
+      <!--</tr>-->
+      <!--<app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key" :key="singleDevice.id"></app-table-item>-->
+    <!--</table>-->
+
+  <!--</section>-->
 </template>
 
 <script>

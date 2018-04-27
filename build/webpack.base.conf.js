@@ -1,8 +1,12 @@
-// 'use strict'
+'use strict'
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// require('!style-loader!css-loader!./styles.css')
+// import 'css-loader'
+// import 'style-loader'
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -29,6 +33,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [ 'file-loader' ]
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -62,22 +70,23 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
-    ]
-  //   loaders:[
-  //     {
-  //       test: />.vue$/,
-  //       loader:'vue'
-  //     },
-  //     {
-  //       test:/>.s[a|c]ss$/,
-  //       loader:'style!css!sass'
-  //     }
-  //   ]
-  // }
-  // vue: {
-  //   loaders:{
-  //     sccs:'style!css!sass'
-  //   }
-  }
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [ /* 'style-loader' */ 'css-loader','to-string-loader' ]
+        })
+        // test: /\.css$/,
+        // loader: 'css-loader!style-loader'
+
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        use: [ 'file-loader' ]
+      },
+    ],
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.css'),
+  ]
 };

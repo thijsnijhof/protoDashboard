@@ -1,20 +1,39 @@
 <template>
-  <section class="device-container" @click="selectDevice(device)">
-    <div class="device-top">
-      <div v-if="device.connected" class="active-icon"></div>
-      <div v-else class="inactive-icon"></div>
-      <h1 class="device-top-text">
-       {{device.name}}
-      </h1>
-    </div>
-    <div class="device-content">
-        <ul class="properties">
-          <li>last online - {{device.last_heard}}</li>
-          <li>ID: {{device.id}}</li>
-          <li>Status: {{device.status}}</li>
-        </ul>
-    </div>
-  </section>
+  <!--<section class="device-container" @click="selectDevice(device)">-->
+    <!--<div class="device-top">-->
+      <!--<div v-if="device.connected" class="active-icon"></div>-->
+      <!--<div v-else class="inactive-icon"></div>-->
+      <!--<h1 class="device-top-text">-->
+       <!--{{device.name}}-->
+      <!--</h1>-->
+    <!--</div>-->
+    <!--<div class="device-content">-->
+        <!--<ul class="properties">-->
+          <!--<li>last online - {{device.last_heard}}</li>-->
+          <!--<li>ID: {{device.id}}</li>-->
+          <!--<li>Status: {{device.status}}</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+  <!--</section>-->
+
+  <v-ons-card modifier="material" @click="selectDevice(device)">
+    <v-ons-list-title>
+      {{device.name}}
+    </v-ons-list-title>
+
+    <!--<div class="device-content">-->
+      <v-ons-list>
+        <v-ons-list-header modifier="material">
+          <div v-if="device.connected" class="active-icon"></div>
+          <div v-else class="inactive-icon"></div>
+
+        </v-ons-list-header>
+        <v-ons-list-item>last online - {{device.last_heard}}</v-ons-list-item>
+        <v-ons-list-item>ID: {{device.id}}</v-ons-list-item>
+        <v-ons-list-item>Status: {{device.status}}</v-ons-list-item>
+      </v-ons-list>
+    <!--</div>-->
+  </v-ons-card>
 </template>
 
 <script>
@@ -26,6 +45,7 @@ export default {
       const selectedDeviceData = device;
       console.log('selectedDeviceId is: ',selectedDeviceId);
       console.log('selectedDeviceData is: ', selectedDeviceData);
+//      this.$store.dispatch('navigator/selectedDevice', selectedDeviceId)
       this.$store.dispatch('selectedDevice', selectedDeviceId)
     }
   }

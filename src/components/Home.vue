@@ -1,22 +1,37 @@
 <template>
-  <div class="container">
+  <!--<div class="container">-->
+    <!--<app-device v-for="device in devices" :device="device" :key="device.id" class="list-style"></app-device>-->
+  <!--</div>-->
+  <v-ons-page modifier="material" >
     <app-device v-for="device in devices" :device="device" :key="device.id" class="list-style"></app-device>
-  </div>
+  </v-ons-page>
 </template>
 
 <script>
   import Device from './listitems/Device.vue';
+  import {mapGetters} from 'vuex';
+
   export default {
     components: {
       appDevice: Device
     },
     computed: {
+//      ...mapGetters('navigator', [
+//        'token',
+//        'data',
+//        'isLoggedIn'
+//      ]),
       devices() {
+//        console.log('getters data', this.$store.state);
+//        console.log('getters data', this.$store.getters.accessToken);
         console.log('getters data', this.$store.getters.data);
+//        console.log('getters data', this.$store.getters);
+//        return this.$store.state.navigator.data;
         return this.$store.getters.data;
-      }
+      },
     },
     created:function() {
+//        this.$store.dispatch('navigator/fetchDevices')
         this.$store.dispatch('fetchDevices')
     }
   }

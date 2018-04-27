@@ -9,6 +9,165 @@ Vue.use(Vuex);
 
 // export const store to have access to it outside of this file
 // we can access this in other files by using $store
+// export  default const store = new Vuex.Store({
+
+// TRYOUT FOR ONS NAVIGATOR
+// const navigator = {
+//   namespaced:true,
+//   state: {
+//     // initial state
+//     isLoggedIn: false,
+//     accessToken: null,
+//     data: {},
+//     singleDevice: {},
+//     singleDeviceData:[],
+//     settingsArray,
+//     stack:[]
+//   },
+//   plugins: [
+//     // persist the accessToken to localStorage
+//     // https://github.com/robinvdvleuten/vuex-persistedstate
+//     createPersistedState({
+//       storage: {
+//         getItem: key => Cookies.get(key),
+//         setItem: (key, value) => Cookies.set(key, value, {expires: 7, secure: false}),
+//         removeItem: key => Cookies.remove(key)
+//       }
+//     })
+//   ],
+//   mutations: {
+//     authUser(state, userData) {
+//       //store the accessToken in the store
+//       // this.state.accessToken= userData.token;
+//       state.accessToken = userData.token;
+//       state.isLoggedIn = true;
+//       console.log(userData.token);
+//       console.log(state.accessToken);
+//       console.log(state.data);
+//       console.log(state.singleDevice);
+//     },
+//     logoutUser(state,accessToken) {
+//       Cookies.remove('accessToken', 'userId', 'token');
+//       state.isLoggedIn = false;
+//       console.log(accessToken);
+//     },
+//     addDevices(state, newData) {
+//       state.data = newData;
+//       // console.log('addDevices ', state);
+//       // console.log('newData', newData);
+//       console.log('state data ', state.data);
+//     },
+//     singleDevice(state, device) {
+//       state.singleDevice = device;
+//       const particle = new Particle();
+//       particle.getVariable({
+//         deviceId: state.singleDevice,
+//         name: 'getMSTRSet',
+//         auth: state.accessToken
+//       })
+//         .then( data =>{
+//           let deviceCSV = data.body.result;
+//           let deviceData = deviceCSV.split(",");
+//           // let combinedArray = {};
+//           let combinedArray = [];
+//           for(let result in deviceData){
+//             // combinedArray[settingsArray[result]]=deviceData[result];
+//             combinedArray.push({name:settingsArray[result], value:deviceData[result]});
+//           }
+//           state.singleDeviceData = combinedArray;
+//           console.log('CombinedArray after is: ', combinedArray);
+//         });
+//     },
+//     singleDeviceData(state,device){
+//
+//     },
+//     // RESETTING THE PAGE STACK
+//     reset (state, page) {
+//       state.stack = Array.isArray(page) ? page : [page || state.stack[0]];
+//
+//     }
+//   },
+//   getters: {
+//     // the getters can be listened to in other components
+//     // when the data changes, the data in the components changes too
+//     data: state => {
+//       return state.data;
+//     },
+//     token :state => {
+//       return state.accessToken;
+//     },
+//     singleDevice: state => {
+//       return state.singleDevice;
+//     },
+//     singleDeviceData: state => {
+//       return state.singleDeviceData;
+//     },
+//     isLoggedIn: state => {
+//       return state.isLoggedIn;
+//     },
+//     pageStack: state => {
+//       return state.stack
+//     }
+//   },
+//   actions: {
+//     // authData = payload
+//     // commit, commits the context to the mutation, changing the state
+//     login({commit}, authData) {
+//       const particle = new Particle();
+//       particle.login({
+//         username: authData.username,
+//         password: authData.password
+//       })
+//       // commit the authUser mutation
+//         .then(res => {
+//           console.log("res: ", res.body);
+//           commit('authUser', {
+//             token: res.body.access_token
+//             // token:'ad7f178446ed942379772e3900df4f73fb756160'
+//           });
+//           router.push('/home')
+//         })
+//         // catch errors
+//         .catch(error => console.log('failed to login', error))
+//     },
+//     logout({commit}, accessToken) {
+//       commit('logoutUser', accessToken);
+//       router.push('/')
+//     },
+//     // can be used to show data
+//     // fetch and show
+//     fetchDevices({commit}) {
+//       const particle = new Particle();
+//       console.log(this.state);
+//       const accessToken = this.state.accessToken;
+//       // const accessToken = this.state.userData;
+//       // const testdev = particle.listDevices({auth: accessToken});
+//       // testdev.then(function(devices){console.log('Devices: ', devices)});
+//       particle.listDevices({auth: accessToken})
+//         .then(devices => {
+//           console.log('Devices',devices);
+//           commit('addDevices', devices.body);
+//         })
+//         .catch(error => console.log('List devices failed ', error))
+//     },
+//     selectedDevice({commit}, device) {
+//       commit('singleDevice', device);
+//       router.push('/dashboard');
+//     }
+//   }
+// };
+// export default new Vuex.Store({
+//    modules: {
+//     navigator
+//   }
+// })
+// HistorMonodekDektInEenLaagWit
+
+// OLD STORE
+Vue.use(Vuex);
+
+// export const store to have access to it outside of this file
+// we can access this in other files by using $store
 export const store = new Vuex.Store({
   state: {
     // initial state
@@ -138,3 +297,4 @@ export const store = new Vuex.Store({
   }
 });
 // HistorMonodekDektInEenLaagWit
+//

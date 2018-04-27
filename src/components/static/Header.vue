@@ -1,16 +1,21 @@
 <template>
-  <section>
+  <!--<section>-->
+    <!--<h1>AVAILABLE DEVICES</h1>-->
+    <!--<h1>{{$route.name}}</h1>-->
+    <!--<button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>-->
+  <!--</section>-->
+  <v-ons-toolbar modifier="material">
     <h1>AVAILABLE DEVICES</h1>
     <h1>{{$route.name}}</h1>
-    <button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>
-  </section>
+    <v-ons-button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</v-ons-button>
+  </v-ons-toolbar>
 </template>
 
 <script>
 export default {
   methods :{
     onLogout(){
-      this.$store.dispatch('logout')
+      this.$store.dispatch('navigator/logout')
     }
   }
 }
