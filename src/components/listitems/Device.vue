@@ -17,22 +17,27 @@
   <!--</section>-->
 
   <v-ons-card modifier="material" @click="selectDevice(device)">
-    <v-ons-list-title>
-      {{device.name}}
-    </v-ons-list-title>
-
+    <v-ons-list>
     <!--<div class="device-content">-->
       <v-ons-list>
-        <v-ons-list-header modifier="material">
+        <v-ons-list-title modifier="material" class="device-header">
           <div v-if="device.connected" class="active-icon"></div>
           <div v-else class="inactive-icon"></div>
+          {{device.name}}
+        </v-ons-list-title>
 
-        </v-ons-list-header>
-        <v-ons-list-item>last online - {{device.last_heard}}</v-ons-list-item>
-        <v-ons-list-item>ID: {{device.id}}</v-ons-list-item>
+        <v-ons-list-header>Last Online</v-ons-list-header>
+        <v-ons-list-item>{{device.last_heard}}</v-ons-list-item>
+
+        <v-ons-list-header>Device ID</v-ons-list-header>
+        <v-ons-list-item>{{device.id}}</v-ons-list-item>
+
+        <v-ons-list-header>Status</v-ons-list-header>
         <v-ons-list-item>Status: {{device.status}}</v-ons-list-item>
       </v-ons-list>
     <!--</div>-->
+    </v-ons-list>
+
   </v-ons-card>
 </template>
 
@@ -53,6 +58,10 @@ export default {
 </script>
 
 <style scoped>
+  .device-header {
+    display:flex;
+    align-items:center;
+  }
   .device-container {
     display: flex;
     flex-direction: column;
@@ -107,7 +116,6 @@ export default {
     width:15px;
     background-color: limegreen;
     border-radius:50%;
-    margin-left: 5%;
     margin-right:5%;
   }
 
@@ -116,7 +124,6 @@ export default {
     width:15px;
     background-color: #cd0c00;
     border-radius:50%;
-    margin-left: 5%;
     margin-right:5%;
   }
 </style>

@@ -19,6 +19,11 @@ import VOnsListItem from'vue-onsenui/esm/components/VOnsListItem';
 import VOnsListTitle from'vue-onsenui/esm/components/VOnsListTitle';
 import VOnsLazyRepeat from 'vue-onsenui/esm/components/VOnsLazyRepeat';
 import VOnsNavigator from 'vue-onsenui/esm/components/VOnsNavigator';
+import VOnsToolbar from 'vue-onsenui/esm/components/VOnsToolbar';
+import VOnsIcon from 'vue-onsenui/esm/components/VOnsIcon';
+import VOnsCheckbox from 'vue-onsenui/esm/components/VOnsCheckbox';
+import VOnsRange from 'vue-onsenui/esm/components/VOnsRange';
+
 
 Vue.use(VueOnsen);
 Vue.component(VOnsPage.name, VOnsPage);
@@ -30,6 +35,10 @@ Vue.component(VOnsListTitle.name, VOnsListTitle);
 Vue.component(VOnsInput.name, VOnsInput);
 Vue.component(VOnsLazyRepeat.name, VOnsLazyRepeat);
 Vue.component(VOnsNavigator.name, VOnsNavigator);
+Vue.component(VOnsToolbar.name, VOnsToolbar);
+Vue.component(VOnsIcon.name, VOnsIcon);
+Vue.component(VOnsCheckbox.name, VOnsCheckbox);
+Vue.component(VOnsRange.name, VOnsRange);
 // import VueOnsen
 // import VueOnsen from 'vue-onsenui';
 //

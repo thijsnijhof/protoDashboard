@@ -1,5 +1,6 @@
-<template>
+<template >
   <v-ons-page>
+    <div class="background"></div>
   <div class="container">
     <form @submit.prevent="onSubmit({username, password})" class="login-container" ref="indexform" id="indexform">
       <h1>LOGIN</h1>
@@ -41,6 +42,13 @@
 </script>
 
 <style scoped>
+  .background {
+    background: #555; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(#555, #222); /* For Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#555, #222); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(#555, #222); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#555, #222); /* Standard syntax */
+  }
   h1 {
     font-size: large;
   }
@@ -58,6 +66,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height:100%;
   }
 
   .login-container {
