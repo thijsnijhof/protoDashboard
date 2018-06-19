@@ -78,7 +78,8 @@ export const store = new Vuex.Store({
           // This way I can set the values of each property and list them with name and value
           let combinedArray = [];
           for (let result in deviceData) {
-            combinedArray.push({name: settingsArray[result], value: deviceData[result]});
+            let key = settingsArray.indexOf(settingsArray[result]);
+            combinedArray.push({name: settingsArray[result], value: deviceData[result], key:key});
           }
           // Set the state to the combinedArray so we can access the values in the Dashboard component
           state.singleDeviceData = combinedArray;
@@ -155,11 +156,14 @@ export const store = new Vuex.Store({
     // Action to select a device
     // This action is dispatched from the Home component upon selecting a device.
     selectedDevice({commit}, device) {
+      console.log('storeSelectedDevice: ',device)
       commit('singleDevice', device);
       router.push('/dashboard');
     },
-    editSetting({commit}) {
+    editSetting({commit}, changedVal) {
       // Action to edit a single setting in the singleDeviceData
+      console.log('storeEditSetting: ',changedVal);
+      commit('editSingleSetting',)
     },
     // Action to save updated settings
     // saveSettings is dispatched from the Dashboard component.

@@ -2,7 +2,7 @@
   <!--<div class="container">-->
     <!--<app-device v-for="device in devices" :device="device" :key="device.id" class="list-style"></app-device>-->
   <!--</div>-->
-  <v-ons-page modifier="material" infinite-scroll>
+  <v-ons-page modifier="material" >
     <div class="background"></div>
         <app-device v-for="device in devices" :device="device" :key="device.id" class="list-style"></app-device>
   </v-ons-page>

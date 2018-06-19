@@ -23,7 +23,7 @@ import VOnsToolbar from 'vue-onsenui/esm/components/VOnsToolbar';
 import VOnsIcon from 'vue-onsenui/esm/components/VOnsIcon';
 import VOnsCheckbox from 'vue-onsenui/esm/components/VOnsCheckbox';
 import VOnsRange from 'vue-onsenui/esm/components/VOnsRange';
-
+import VOnsSwitch from 'vue-onsenui/esm/components/VOnsSwitch';
 
 Vue.use(VueOnsen);
 Vue.component(VOnsPage.name, VOnsPage);
@@ -39,6 +39,8 @@ Vue.component(VOnsToolbar.name, VOnsToolbar);
 Vue.component(VOnsIcon.name, VOnsIcon);
 Vue.component(VOnsCheckbox.name, VOnsCheckbox);
 Vue.component(VOnsRange.name, VOnsRange);
+Vue.component(VOnsSwitch.name, VOnsSwitch);
+
 // import VueOnsen
 // import VueOnsen from 'vue-onsenui';
 //

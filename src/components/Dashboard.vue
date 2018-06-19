@@ -64,8 +64,10 @@
           </div>
 
         </v-ons-list-header>
-        <app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key"
-                        :key="singleDevice.id"></app-table-item>
+        <app-table-item v-for="(singleDevice,key, index) in singleDevice"
+                        :singleDevice="singleDevice"
+                        v-bind:key="key"
+        ></app-table-item>
       </v-ons-list>
 
     </v-ons-list>
