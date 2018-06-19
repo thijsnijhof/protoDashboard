@@ -20,7 +20,8 @@ export const store = new Vuex.Store({
     data: {},
     singleDevice: {},
     singleDeviceData: [],
-    settingsArray
+    settingsArray,
+    singleSetting:[]
   },
   plugins: [
     // persist the accessToken to localStorage
@@ -86,8 +87,14 @@ export const store = new Vuex.Store({
           console.log('CombinedArray after is: ', combinedArray);
         });
     },
-    editSingleSetting() {
+    editSingleSetting(state,changedVal) {
       // Takes the edited setting and put it in the combinedArray
+      let newSettings = state.singleDeviceData;
+      newSettings[changedVal.key] = {name:changedVal.name,value:changedVal.value,key:changedVal.key};
+      console.log('new: ',newSettings);
+      state.singleSetting = newSettings;
+
+
     },
     saveAllSettings(state, device) {
       // Takes the final new array of objects
@@ -163,7 +170,7 @@ export const store = new Vuex.Store({
     editSetting({commit}, changedVal) {
       // Action to edit a single setting in the singleDeviceData
       console.log('storeEditSetting: ',changedVal);
-      commit('editSingleSetting',)
+      commit('editSingleSetting', changedVal)
     },
     // Action to save updated settings
     // saveSettings is dispatched from the Dashboard component.

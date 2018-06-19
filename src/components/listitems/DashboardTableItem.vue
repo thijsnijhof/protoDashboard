@@ -96,7 +96,7 @@
         this.singleDevice.value = this.editText;
         let changedVal = {val: this.singleDevice};
         console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {name: changedVal.name, value: changedVal.value, key:changedVal.key});
+        this.$store.dispatch('editSetting', {name: changedVal.val.name, value: changedVal.val.value, key:changedVal.val.key});
         this.editText = ''
 
       },
@@ -104,13 +104,13 @@
         let bool = this.singleDevice.value ? '0' : '1';
         let changedVal = {val: this.singleDevice};
         console.log('changedVal: ', changedVal, 'bool: ', bool);
-        this.$store.dispatch('editSetting', {name: changedVal.name, value: bool, key:changedVal.key})
+        this.$store.dispatch('editSetting', {name: changedVal.val.name, value: bool, key:changedVal.val.key})
 
       },
       editValue() {
         let changedVal = {val: this.singleDevice};
-        console.log(changedVal);
-        this.$store.dispatch('editSetting', {name: changedVal.name, value: changedVal.value, key:changedVal.key})
+        console.log(changedVal.val.name);
+        this.$store.dispatch('editSetting', {name: changedVal.val.name, value: changedVal.val.value, key:changedVal.val.key})
       }
     }
 
