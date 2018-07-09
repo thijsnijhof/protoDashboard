@@ -3,30 +3,30 @@
     <!--<div class="background"></div>-->
 
     <!--<section class="dashboard-container">-->
-      <!--<div class="dashboard-header">-->
-        <!--<section class="devices-list">-->
-          <!--<label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>-->
-          <!--<select name="devices" id="devices">-->
-            <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-            <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-          <!--</select>-->
-        <!--</section>-->
-        <!--<button class="bulk-edit">BULK EDIT</button>-->
-        <!--<section class="collapse-container">-->
-          <!--<p class="collapse-all">COLLAPSE ALL</p>-->
-          <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
-        <!--</section>-->
-      <!--</div>-->
+    <!--<div class="dashboard-header">-->
+    <!--<section class="devices-list">-->
+    <!--<label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>-->
+    <!--<select name="devices" id="devices">-->
+    <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+    <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+    <!--</select>-->
+    <!--</section>-->
+    <!--<button class="bulk-edit">BULK EDIT</button>-->
+    <!--<section class="collapse-container">-->
+    <!--<p class="collapse-all">COLLAPSE ALL</p>-->
+    <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
+    <!--</section>-->
+    <!--</div>-->
 
-      <!--<table class="dashboard-block">-->
-        <!--<tr class="table-head">-->
-          <!--<th>SettingName</th>-->
-          <!--<th>Value</th>-->
-          <!--<th>Edit</th>-->
-        <!--</tr>-->
-        <!--<app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key"-->
-                        <!--:key="singleDevice.id"></app-table-item>-->
-      <!--</table>-->
+    <!--<table class="dashboard-block">-->
+    <!--<tr class="table-head">-->
+    <!--<th>SettingName</th>-->
+    <!--<th>Value</th>-->
+    <!--<th>Edit</th>-->
+    <!--</tr>-->
+    <!--<app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key"-->
+    <!--:key="singleDevice.id"></app-table-item>-->
+    <!--</table>-->
 
     <!--</section>-->
     <v-ons-list modifier="material" infinite-scroll>
@@ -34,19 +34,19 @@
         <div class="left">
           <label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>
           <!--<select name="devices" id="devices">-->
-            <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-            <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
+          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
           <!--</select>-->
         </div>
 
         <div class="right">
-          <v-ons-button  class="bulk-edit" modifier="material">BULK EDIT</v-ons-button>
+          <v-ons-button class="bulk-edit" modifier="material">BULK EDIT</v-ons-button>
 
         </div>
 
         <!--<div class="right">-->
-          <!--<p class="collapse-all">COLLAPSE ALL</p>-->
-          <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
+        <!--<p class="collapse-all">COLLAPSE ALL</p>-->
+        <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
         <!--</div>-->
 
       </v-ons-list-title>
@@ -57,7 +57,7 @@
             SettingName
           </div>
           <!--<div class="centre">-->
-            <!--Value-->
+          <!--Value-->
           <!--</div>-->
           <div class="right">
             Edit
@@ -68,7 +68,14 @@
                         :singleDevice="singleDevice"
                         v-bind:key="key"
         ></app-table-item>
+
       </v-ons-list>
+
+      <div class="dashboard-save-button">
+        <v-ons-button
+          modifier="cta">SAVE SETTINGS
+        </v-ons-button>
+      </div>
 
     </v-ons-list>
   </v-ons-page>
@@ -100,6 +107,7 @@
     background: -moz-radial-gradient(#555, #222); /* For Firefox 3.6 to 15 */
     background: radial-gradient(#555, #222); /* Standard syntax */
   }
+
   #devices {
     background-color: #fff;
     border: none;
@@ -129,14 +137,14 @@
     background-color: deepskyblue;
     align-items: center;
     justify-content: space-between;
-    padding:10px;
+    padding: 10px;
   }
 
   .icon {
     margin-left: 10px;
     margin-right: 5px;
     color: #fff;
-    font-size:20px;
+    font-size: 20px;
   }
 
   .bulk-edit {
@@ -165,6 +173,13 @@
     height: 7%;
     align-items: center;
     padding: 0 10px 0 10px;
+  }
+
+  .dashboard-save-button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:1em 0;
   }
 
 </style>
