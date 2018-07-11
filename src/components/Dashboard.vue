@@ -1,54 +1,23 @@
 <template>
   <v-ons-page modifier="material">
-    <!--<div class="background"></div>-->
 
-    <!--<section class="dashboard-container">-->
-    <!--<div class="dashboard-header">-->
-    <!--<section class="devices-list">-->
-    <!--<label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>-->
-    <!--<select name="devices" id="devices">-->
-    <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-    <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-    <!--</select>-->
-    <!--</section>-->
-    <!--<button class="bulk-edit">BULK EDIT</button>-->
-    <!--<section class="collapse-container">-->
-    <!--<p class="collapse-all">COLLAPSE ALL</p>-->
-    <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
-    <!--</section>-->
-    <!--</div>-->
-
-    <!--<table class="dashboard-block">-->
-    <!--<tr class="table-head">-->
-    <!--<th>SettingName</th>-->
-    <!--<th>Value</th>-->
-    <!--<th>Edit</th>-->
-    <!--</tr>-->
-    <!--<app-table-item v-for="(singleDevice, key) in singleDevice" :singleDevice="singleDevice" :singleDeviceKey="key"-->
-    <!--:key="singleDevice.id"></app-table-item>-->
-    <!--</table>-->
-
-    <!--</section>-->
     <v-ons-list modifier="material" infinite-scroll>
       <v-ons-list-title class="dashboard-header">
         <div class="left">
-          <label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>
-          <!--<select name="devices" id="devices">-->
-          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-          <!--<option value="device_names">MAKE_DYNAMIC</option>-->
-          <!--</select>-->
+          <!--<v-ons-button modifier="quiet" for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></v-ons-button>-->
+          <v-ons-select v-on:change="selectDevice()"
+                        v-model="selectedItem"
+                        modifier="material underbar"
+                        style="background-color: white">
+            <option class="select-bar" v-for="device in devices" :device="device" :key="device.id" :value="device.id">
+              {{ device.name }}
+            </option>
+          </v-ons-select>
         </div>
 
         <div class="right">
           <v-ons-button class="bulk-edit" modifier="material">BULK EDIT</v-ons-button>
-
         </div>
-
-        <!--<div class="right">-->
-        <!--<p class="collapse-all">COLLAPSE ALL</p>-->
-        <!--<i class="fa fa-angle-double-down icon" aria-hidden="true"></i>-->
-        <!--</div>-->
-
       </v-ons-list-title>
 
       <v-ons-list modifier="material">
@@ -56,9 +25,7 @@
           <div class="left">
             SettingName
           </div>
-          <!--<div class="centre">-->
-          <!--Value-->
-          <!--</div>-->
+
           <div class="right">
             Edit
           </div>
@@ -71,12 +38,6 @@
 
       </v-ons-list>
 
-      <div class="dashboard-save-button">
-        <v-ons-button
-          modifier="cta">SAVE SETTINGS
-        </v-ons-button>
-      </div>
-
     </v-ons-list>
   </v-ons-page>
 
@@ -86,11 +47,33 @@
   import DashboardTableItem from './listitems/DashboardTableItem.vue';
 
   export default {
+    props:['device'],
+    data(){
+      return {
+          selectedItem:''
+      }
+    },
     computed: {
       singleDevice() {
-        console.log('getters singleDeviceData', this.$store.getters.singleDeviceData);
         return this.$store.getters.singleDeviceData;
+      },
+      devices() {
+        return this.$store.getters.data;
+      },
+      listDevice(){
+        return this.$store.getters.singleDevice
       }
+    },
+    methods: {
+      selectDevice(){
+        const selectedDeviceId = this.selectedItem;
+        this.$store.dispatch('selectedDevice', selectedDeviceId)
+      }
+    },
+    created() {
+      const selectedDeviceId = this.$store.getters.singleDevice;
+      this.selectedItem = this.$store.getters.singleDevice;
+      this.$store.dispatch('selectedDevice', selectedDeviceId)
     },
     components: {
       appTableItem: DashboardTableItem
@@ -132,6 +115,13 @@
     background-color: transparent;
   }
 
+  .select-bar {
+    background-color:#fff;
+    padding:2px;
+    font-weight:bold;
+    font-size:small;
+    color:#777;
+  }
   .dashboard-header {
     display: flex;
     background-color: deepskyblue;
@@ -173,13 +163,6 @@
     height: 7%;
     align-items: center;
     padding: 0 10px 0 10px;
-  }
-
-  .dashboard-save-button {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:1em 0;
   }
 
 </style>

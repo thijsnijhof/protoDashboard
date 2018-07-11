@@ -72,6 +72,7 @@ export const store = new Vuex.Store({
           // The CSV string is a string with comma's between each word so: "str1,str2,str3,etc..."
           // Using (",") a comma as the argument will create a new substring between each word
           let deviceCSV = data.body.result;
+          console.log('devicecsv: ', deviceCSV);
           let deviceData = deviceCSV.split(",");
           // To output the list on the Dashboard I want to have an array of objects
           // I made a second array which matches the array key names of the devices
@@ -89,18 +90,61 @@ export const store = new Vuex.Store({
     },
     editSingleSetting(state,changedVal) {
       // Takes the edited setting and put it in the combinedArray
-      let newSettings = state.singleDeviceData;
-      newSettings[changedVal.key] = {name:changedVal.name,value:changedVal.value,key:changedVal.key};
-      console.log('new: ',newSettings);
-      state.singleSetting = newSettings;
+      // Prev function
+      //   let newSettings = state.singleDeviceData;
+      //   newSettings[changedVal.key] = {name:changedVal.name,value:changedVal.value,key:changedVal.key};
+      //   console.log('new: ',newSettings);
+      //   state.singleSetting = newSettings;
+      //   console.log('singleSetting: ',state.singleSetting);
+      const particle = new Particle();
+      const arg = `${changedVal.key}:${changedVal.value}`;
+      const fnPr = particle.callFunction({
+        deviceId:state.singleDevice,
+        name:'setMSTRSet',
+        argument:arg,
+        auth:state.accessToken
+      });
 
+      fnPr.then(
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
 
     },
-    saveAllSettings(state, device) {
+    saveAllSettings(state) {
+      console.log('SaveAllSettings fired!...')
+      const particle = new Particle();
       // Takes the final new array of objects
+      const allSettings = state.singleSetting;
       // Convert it to a new CSV string
+      let csv = [];
+      let csvArray = allSettings.map(a => a.value).join(",");
+      console.log('csvarray: ',csvArray);
       // Call the setMSTRset function from the particle API
       // It takes the deviceId, name of the called function, an argument and the accessToken
+      const fnPr = particle.callFunction({
+        deviceId:state.singleDevice,
+        name:'setMSTRSet',
+        argument:csvArray,
+        auth:state.accessToken
+      });
+
+      fnPr.then(
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
+        // var fnPr = particle.callFunction({ deviceId: 'DEVICE_ID', name: 'brew', argument: 'D0:HIGH', auth: token });
+        //
+        // fnPr.then(
+        //   function(data) {
+        //     console.log('Function called succesfully:', data);
+        //   }, function(err) {
+        //     console.log('An error occurred:', err);
+        //   });
     }
   },
   getters: {
@@ -170,12 +214,12 @@ export const store = new Vuex.Store({
     editSetting({commit}, changedVal) {
       // Action to edit a single setting in the singleDeviceData
       console.log('storeEditSetting: ',changedVal);
-      commit('editSingleSetting', changedVal)
+      commit('editSingleSetting', changedVal);
     },
     // Action to save updated settings
     // saveSettings is dispatched from the Dashboard component.
     saveSettings({commit}) {
-
+        commit('saveAllSettings');
     }
   }
 });

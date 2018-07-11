@@ -25,7 +25,7 @@
 
 <style scoped>
   .main-margin {
-    margin-top:15%;
+    margin-top:56px;
   }
   #app {
     display: flex;

@@ -1,24 +1,7 @@
 <template>
-  <!--<section class="device-container" @click="selectDevice(device)">-->
-    <!--<div class="device-top">-->
-      <!--<div v-if="device.connected" class="active-icon"></div>-->
-      <!--<div v-else class="inactive-icon"></div>-->
-      <!--<h1 class="device-top-text">-->
-       <!--{{device.name}}-->
-      <!--</h1>-->
-    <!--</div>-->
-    <!--<div class="device-content">-->
-        <!--<ul class="properties">-->
-          <!--<li>last online - {{device.last_heard}}</li>-->
-          <!--<li>ID: {{device.id}}</li>-->
-          <!--<li>Status: {{device.status}}</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-  <!--</section>-->
-
   <v-ons-card modifier="material" @click="selectDevice(device)">
     <v-ons-list>
-    <!--<div class="device-content">-->
+
       <v-ons-list>
         <v-ons-list-title modifier="material" class="device-header">
           <div v-if="device.connected" class="active-icon"></div>
@@ -35,7 +18,7 @@
         <v-ons-list-header>Status</v-ons-list-header>
         <v-ons-list-item>Status: {{device.status}}</v-ons-list-item>
       </v-ons-list>
-    <!--</div>-->
+
     </v-ons-list>
 
   </v-ons-card>

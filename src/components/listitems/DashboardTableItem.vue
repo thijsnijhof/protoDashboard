@@ -1,9 +1,7 @@
 <template>
-
   <v-ons-list modifier="material">
-    <v-ons-list-header class="list-header-bg">
+    <v-ons-list-header class="list-header-bg" :style="`${edited}`">
       {{singleDevice.name}}
-
       <v-ons-checkbox id="checkbox" v-model="onEdit" modifier="material"
                       v-if="singleDevice.value !== ''"></v-ons-checkbox>
 
@@ -32,39 +30,87 @@
                        type="number"
                        min="0"
                        max="9999"
-                       modifier="material" v-if="singleDevice.name === 'ProductId'"></v-ons-input>
-          <v-ons-button v-on:click="confirmNumValue()" v-if="singleDevice.name === 'ProductId'"
+                       modifier="material"
+                       v-if="singleDevice.name === 'ProductId'">
+          </v-ons-input>
+          <v-ons-button v-on:click="confirmNumValue()"
+                        v-if="singleDevice.name === 'ProductId'"
                         modifier="outline">update
           </v-ons-button>
         </div>
 
         <!--USEVOLTSENSE-->
-        <v-ons-switch v-on:change="editBoolValue()" v-model="singleDevice.value"
-                      v-if="singleDevice.name === 'useVoltSense'"></v-ons-switch>
+        <div class="text-input-wrapper">
+          <v-ons-switch v-model="singleDevice.value"
+                        v-if="singleDevice.name === 'useVoltSense'"></v-ons-switch>
+          <v-ons-button v-on:click="confirmBoolValue()"
+                        v-if="singleDevice.name === 'useVoltSense'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
+
         <!--HASROCKERSWITCH-->
-        <!--<v-ons-checkbox v-on:change="editBoolValue()" v-model="singleDevice.value"  v-bind:true-value="1" v-bind:false-value="0" v-if="singleDevice.name === 'hasRockerSwitch'"></v-ons-checkbox>-->
-        <v-ons-switch v-on:change="editBoolValue()" v-model="singleDevice.value"
-                      v-if="singleDevice.name === 'hasRockerSwitch'"></v-ons-switch>
+        <div class="text-input-wrapper">
+          <!--<v-ons-checkbox v-on:change="confirmBoolValue()" v-model="singleDevice.value"  v-bind:true-value="1" v-bind:false-value="0" v-if="singleDevice.name === 'hasRockerSwitch'"></v-ons-checkbox>-->
+          <v-ons-switch v-model="singleDevice.value"
+                        v-if="singleDevice.name === 'hasRockerSwitch'"></v-ons-switch>
+          <v-ons-button v-on:click="confirmBoolValue()"
+                        v-if="singleDevice.name === 'hasRockerSwitch'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
+
         <!--HASPUSHBUTTON-->
-        <v-ons-switch v-on:change="editBoolValue()" v-model="singleDevice.value"
-                      v-if="singleDevice.name === 'hasPushButton'"></v-ons-switch>
+        <div class="text-input-wrapper">
+          <v-ons-switch v-model="singleDevice.value"
+                        v-if="singleDevice.name === 'hasPushButton'"></v-ons-switch>
+          <v-ons-button v-on:click="confirmBoolValue()"
+                        v-if="singleDevice.name === 'hasPushButton'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
+
         <!--HASPIRSENSOR-->
-        <v-ons-switch v-on:change="editBoolValue()" v-model="singleDevice.value"
-                      v-if="singleDevice.name === 'hasPIRSensor'"></v-ons-switch>
+        <div class="text-input-wrapper">
+          <v-ons-switch v-model="singleDevice.value"
+                        v-if="singleDevice.name === 'hasPIRSensor'"></v-ons-switch>
+          <v-ons-button v-on:click="confirmBoolValue()"
+                        v-if="singleDevice.name === 'hasPIRSensor'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
+
         <!--HASRTCBATTERY-->
-        <v-ons-switch v-on:change="editBoolValue()" v-model="singleDevice.value"
-                      v-if="singleDevice.name === 'hasRTCBattery'"></v-ons-switch>
+        <div class="text-input-wrapper">
+          <v-ons-switch v-model="singleDevice.value"
+                        v-if="singleDevice.name === 'hasRTCBattery'"></v-ons-switch>
+          <v-ons-button v-on:click="confirmBoolValue()"
+                        v-if="singleDevice.name === 'hasRTCBattery'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
 
         <!--BUTTONPIN-->
-        <v-ons-range v-on:change="editValue()" v-model="singleDevice.value" min="0" max="17" style="width:100%;"
-                     modifier="material" v-if="singleDevice.name === 'buttonPin'"></v-ons-range>
+        <!--TODO change to select range-->
+        <div class="text-input-wrapper">
+          <v-ons-select v-model="selectedButtonPin" v-if="singleDevice.name === 'buttonPin'" modifier="material underbar">
+            <option v-for="buttonPin in buttonPins" :value="buttonPin.value">
+              {{ buttonPin.text }}
+            </option>
+          </v-ons-select>
+
+          <v-ons-button v-on:click="confirmButtonPin()" v-if="singleDevice.name === 'buttonPin'"
+                        modifier="outline">update
+          </v-ons-button>
+        </div>
+
 
         <!--FIRMWAREVERSION-->
         <div class="text-input-wrapper">
           <v-ons-input v-model="editNum"
                        modifier="material" v-if="singleDevice.name === 'FirmwareVersion'"
                        type="number"
-                       step="32"
+                       step="1"
                        min="0"
                        max="9999"
           ></v-ons-input>
@@ -78,7 +124,7 @@
           <v-ons-input v-model="editNum"
                        modifier="material" v-if="singleDevice.name === 'LocationLatitude'"
                        type="number"
-                       step="32"
+                       step="1"
                        min="-90"
                        max="90"
           ></v-ons-input>
@@ -92,7 +138,7 @@
           <v-ons-input v-model="editNum"
                        modifier="material" v-if="singleDevice.name === 'LocationLongitude'"
                        type="number"
-                       step="32"
+                       step="1"
                        min="-180"
                        max="180"
           ></v-ons-input>
@@ -221,7 +267,7 @@
     data() {
       return {
         onEdit: false,
-//        initialVal:this.singleDevice,
+        edited:'color:#777',
         editText: '',
         editNum: this.singleDevice.value,
         wifiModes: [
@@ -245,13 +291,29 @@
           {text: 'Slave-Sync-Complete', value: 5},
           {text: 'Slave-Sync-Pattern', value: 6},
         ],
+        buttonPins: [
+          {text: 'D0', value: 0},
+          {text: 'D1', value: 1},
+          {text: 'D2', value: 2},
+          {text: 'D3', value: 3},
+          {text: 'D4', value: 4},
+          {text: 'D5', value: 5},
+          {text: 'D6', value: 6},
+          {text: 'D7', value: 7},
+          {text: 'A0', value: 10},
+          {text: 'A1', value: 11},
+          {text: 'A2', value: 12},
+          {text: 'A3', value: 13},
+          {text: 'A4', value: 14},
+          {text: 'A5', value: 15},
+          {text: 'A6', value: 16},
+          {text: 'A7', value: 17},
+        ],
+        selectedButtonPin:this.singleDevice.value,
         selectedAppMode: this.singleDevice.value,
         selectedWifiMode: this.singleDevice.value,
         selectedMasterSlaveMode: this.singleDevice.value
       }
-    },
-    created() {
-//      console.log(this.singleDevice);
     },
     components: {
       appInputSlider: InputSlider,
@@ -268,6 +330,8 @@
           key: changedVal.val.key
         });
         this.singleDevice.value = changedVal.val.value;
+        this.onEdit = false;
+        this.edited='color:green'
       },
       confirmAppMode() {
         this.singleDevice.value = this.selectedAppMode;
@@ -279,6 +343,21 @@
           key: changedVal.val.key
         });
         this.singleDevice.value = changedVal.val.value;
+        this.onEdit = false;
+        this.edited='color:green'
+      },
+      confirmButtonPin() {
+        this.singleDevice.value = this.selectedButtonPin;
+        let changedVal = {val: this.singleDevice};
+        console.log('changedVal: ', changedVal);
+        this.$store.dispatch('editSetting', {
+          name: changedVal.val.name,
+          value: changedVal.val.value,
+          key: changedVal.val.key
+        });
+        this.singleDevice.value = changedVal.val.value;
+        this.onEdit = false;
+        this.edited='color:green'
       },
       confirmWifi() {
         this.singleDevice.value = this.selectedWifiMode;
@@ -290,6 +369,8 @@
           key: changedVal.val.key
         });
         this.selectedWifiMode = changedVal.val.value;
+        this.onEdit = false;
+        this.edited='color:green'
       },
       confirmNumValue() {
         this.singleDevice.value = this.editNum;
@@ -301,6 +382,8 @@
           key: changedVal.val.key
         });
         this.editNum = changedVal.val.value;
+        this.onEdit = false;
+        this.edited='color:green'
       },
       confirmTextValue() {
         this.singleDevice.value = this.editText;
@@ -311,15 +394,20 @@
           value: changedVal.val.value,
           key: changedVal.val.key
         });
-        this.editText = ''
-
+        this.editText = '';
+        this.onEdit = false;
+        this.edited='color:green'
       },
-      editBoolValue() {
-        let bool = this.singleDevice.value ? '0' : '1';
+      confirmBoolValue() {
+        let bool = this.singleDevice.value ? '1' : '0';
         let changedVal = {val: this.singleDevice};
         console.log('changedVal: ', changedVal, 'bool: ', bool);
-        this.$store.dispatch('editSetting', {name: changedVal.val.name, value: bool, key: changedVal.val.key})
-
+        this.$store.dispatch('editSetting', {
+          name: changedVal.val.name,
+          value: bool,
+          key: changedVal.val.key});
+        this.onEdit = false;
+        this.edited='color:green'
       },
       editValue() {
         let changedVal = {val: this.singleDevice};
@@ -328,9 +416,11 @@
           name: changedVal.val.name,
           value: changedVal.val.value,
           key: changedVal.val.key
-        })
+        });
+        this.onEdit = false;
+        this.edited='color:green'
       }
-    }
+    },
 
   }
 </script>
