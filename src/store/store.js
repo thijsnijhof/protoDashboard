@@ -119,7 +119,6 @@ export const store = new Vuex.Store({
       // Takes the final new array of objects
       const allSettings = state.singleSetting;
       // Convert it to a new CSV string
-      let csv = [];
       let csvArray = allSettings.map(a => a.value).join(",");
       console.log('csvarray: ',csvArray);
       // Call the setMSTRset function from the particle API
@@ -137,14 +136,6 @@ export const store = new Vuex.Store({
         }, function(err) {
           console.log('An error occurred:', err);
         });
-        // var fnPr = particle.callFunction({ deviceId: 'DEVICE_ID', name: 'brew', argument: 'D0:HIGH', auth: token });
-        //
-        // fnPr.then(
-        //   function(data) {
-        //     console.log('Function called succesfully:', data);
-        //   }, function(err) {
-        //     console.log('An error occurred:', err);
-        //   });
     }
   },
   getters: {
