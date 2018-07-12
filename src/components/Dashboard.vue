@@ -5,10 +5,7 @@
       <v-ons-list-title class="dashboard-header">
         <div class="left">
           <!--<v-ons-button modifier="quiet" for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></v-ons-button>-->
-          <v-ons-select v-on:change="selectDevice()"
-                        v-model="selectedItem"
-                        modifier="material underbar"
-                        style="background-color: white">
+          <v-ons-select v-on:change="selectDevice()" v-model="selectedItem" modifier="material underbar" style="background-color: white">
             <option class="select-bar" v-for="device in devices" :device="device" :key="device.id" :value="device.id">
               {{ device.name }}
             </option>
@@ -16,8 +13,12 @@
         </div>
 
         <div class="right">
-          <v-ons-button class="bulk-edit" modifier="material">BULK EDIT</v-ons-button>
+          <v-ons-select v-on:change="selectSet()" v-model="selectedSet" modifier="material underbar" style="background-color: white" selected>
+            <option class="select-bar" :value="'MSTRSet'">Master</option>
+            <option class="select-bar" :value="'USRSet'">User</option>
+          </v-ons-select>
         </div>
+
       </v-ons-list-title>
 
       <v-ons-list modifier="material">
@@ -50,7 +51,8 @@
     props:['device'],
     data(){
       return {
-          selectedItem:''
+          selectedItem:'',
+          selectedSet:'Master'
       }
     },
     computed: {
@@ -60,14 +62,18 @@
       devices() {
         return this.$store.getters.data;
       },
-      listDevice(){
-        return this.$store.getters.singleDevice
-      }
     },
     methods: {
       selectDevice(){
         const selectedDeviceId = this.selectedItem;
         this.$store.dispatch('selectedDevice', selectedDeviceId)
+      },
+      selectSet(){
+        const selectedSet = this.selectedSet;
+        console.log(selectedSet);
+        const selectedDeviceId = this.selectedItem;
+        this.$store.dispatch('selectSet',selectedSet);
+        this.$store.dispatch('selectedDevice', selectedDeviceId);
       }
     },
     created() {

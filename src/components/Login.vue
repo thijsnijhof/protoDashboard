@@ -21,6 +21,9 @@
         password: ''
       }
     },
+//    created(){
+//      this.$store.dispatch('checkLogin');
+//    },
     methods: {
       onSubmit() {
         // assign the user input

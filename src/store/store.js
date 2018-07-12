@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import createPersistedState from 'vuex-persistedstate';
 import router from '../router';
 import settingsArray from './settingsArray';
+import usrArray from './usrArray';
 
 // Export const store to have access to it outside of this file
 // We can access this in other files by using $store
@@ -21,6 +22,8 @@ export const store = new Vuex.Store({
     singleDevice: {},
     singleDeviceData: [],
     settingsArray,
+    usrArray,
+    selectedSet:'MSTRSet',
     singleSetting:[]
   },
   plugins: [
@@ -42,10 +45,19 @@ export const store = new Vuex.Store({
       state.isLoggedIn = true;
       console.log(userData.token);
     },
+    authChecked(state){
+      state.isLoggedIn = true;
+    },
     logoutUser(state, accessToken) {
       Cookies.remove('accessToken', 'userId', 'token');
       state.isLoggedIn = false;
+      state.accessToken='';
       console.log(accessToken);
+    },
+    changeSet(state,selected){
+      console.log('selected', selected);
+      state.selectedSet = selected;
+      console.log(state.selectedSet);
     },
     addDevices(state, newData) {
       // Store the data from the devices in the store
@@ -61,7 +73,8 @@ export const store = new Vuex.Store({
       const particle = new Particle();
       particle.getVariable({
         deviceId: state.singleDevice,
-        name: 'getMSTRSet',
+        name: `get${state.selectedSet}`,
+        // name: `getMSTRSet`,
         auth: state.accessToken
       })
         .then(data => {
@@ -79,10 +92,17 @@ export const store = new Vuex.Store({
           // The deviceData array has all the values. I will create a new array and combine it into an array of objects
           // This way I can set the values of each property and list them with name and value
           let combinedArray = [];
+          let selectedArray = state.selectedSet === 'MSTRSet' ? settingsArray : usrArray;
+          // for (let result in deviceData) {
+          //   let key = settingsArray.indexOf(settingsArray[result]);
+          //   combinedArray.push({name: settingsArray[result], value: deviceData[result], key:key});
+          // }
+
           for (let result in deviceData) {
-            let key = settingsArray.indexOf(settingsArray[result]);
-            combinedArray.push({name: settingsArray[result], value: deviceData[result], key:key});
+            let key = selectedArray.indexOf(selectedArray[result]);
+            combinedArray.push({name: selectedArray[result], value: deviceData[result], key:key});
           }
+
           // Set the state to the combinedArray so we can access the values in the Dashboard component
           state.singleDeviceData = combinedArray;
           console.log('CombinedArray after is: ', combinedArray);
@@ -100,7 +120,8 @@ export const store = new Vuex.Store({
       const arg = `${changedVal.key}:${changedVal.value}`;
       const fnPr = particle.callFunction({
         deviceId:state.singleDevice,
-        name:'setMSTRSet',
+        name:`set${state.selectedSet}`,
+        // name:'setMSTRSet',
         argument:arg,
         auth:state.accessToken
       });
@@ -153,6 +174,9 @@ export const store = new Vuex.Store({
     },
     isLoggedIn: state => {
       return state.isLoggedIn;
+    },
+    selectedSet: state => {
+      return state.selectedSet;
     }
   },
   actions: {
@@ -176,6 +200,15 @@ export const store = new Vuex.Store({
         // catch errors
         .catch(error => console.log('failed to login', error))
     },
+    // checkLogin(state){
+    //   console.log(state.accessToken)
+    //   if(state.accessToken !== ''){
+    //     console.log('AccessToken exists, logging in...');
+    //     router.push('/home')
+    //   } else {
+    //     router.push('/')
+    //   }
+    // },
     logout({commit}, accessToken) {
       commit('logoutUser', accessToken);
       router.push('/')
@@ -211,7 +244,9 @@ export const store = new Vuex.Store({
     // saveSettings is dispatched from the Dashboard component.
     saveSettings({commit}) {
         commit('saveAllSettings');
+    },
+    selectSet({commit}, selected){
+        commit('changeSet', selected);
     }
   }
 });
-// HistorMonodekDektInEenLaagWit
