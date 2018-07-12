@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <router-view/>
+    <app-header v-show="isLoggedIn"></app-header>
+    <router-view class="main-margin"/>
     <app-footer class="sticky"></app-footer>
   </div>
 </template>
@@ -9,20 +9,24 @@
 <script>
   import Header from './components/static/Header.vue';
   import Footer from './components/static/Footer.vue';
-
+  import {mapState} from 'vuex';
+  import { mapGetters } from 'vuex'
   export default {
     name: 'app',
     components: {
       appHeader: Header,
       appFooter: Footer
     },
-    computed: {
-
-    }
+    computed: mapState([
+      'isLoggedIn',
+    ]),
   }
 </script>
 
 <style scoped>
+  .main-margin {
+    margin-top:56px;
+  }
   #app {
     display: flex;
     flex-direction: column;
@@ -38,7 +42,6 @@
     background: -moz-radial-gradient(#555, #222); /* For Firefox 3.6 to 15 */
     background: radial-gradient(#555, #222); /* Standard syntax */
   }
-
   .sticky {
     flex: 1 0 auto;
     justify-self: flex-end;

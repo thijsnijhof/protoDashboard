@@ -1,97 +1,101 @@
 <template>
-  <section class="dashboard-container">
-    <div class="dashboard-header">
-      <section class="devices-list">
-        <label for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></label>
-        <select name="devices" id="devices">
-          <option value="device_names">MAKE_DYNAMIC</option>
-          <option value="device_names">MAKE_DYNAMIC</option>
-        </select>
-      </section>
-      <button class="bulk-edit">BULK EDIT</button>
-      <section class="collapse-container">
-        <p class="collapse-all">COLLAPSE ALL</p>
-        <i class="fa fa-angle-double-down icon" aria-hidden="true"></i>
-      </section>
-    </div>
+  <v-ons-page modifier="material">
 
-    <table class="dashboard-block">
-      <tr class="table-head">
-        <th>Defaults</th>
-        <th>Value</th>
-        <th>Edit</th>
-      </tr>
-      <tr class="table-row">
-        <td>default harmony</td>
-        <td>200</td>
-        <td class="edit">
-          <div id="slidecontainer">
-            <input type="range" min="1" max="255" value="50" class="slider" id="myRange">
+    <v-ons-list modifier="material" infinite-scroll>
+      <v-ons-list-title class="dashboard-header">
+        <div class="left">
+          <!--<v-ons-button modifier="quiet" for="devices"><i class="fa fa-list icon" aria-hidden="true"></i></v-ons-button>-->
+          <v-ons-select v-on:change="selectDevice()"
+                        v-model="selectedItem"
+                        modifier="material underbar"
+                        style="background-color: white">
+            <option class="select-bar" v-for="device in devices" :device="device" :key="device.id" :value="device.id">
+              {{ device.name }}
+            </option>
+          </v-ons-select>
+        </div>
+
+        <div class="right">
+          <v-ons-button class="bulk-edit" modifier="material">BULK EDIT</v-ons-button>
+        </div>
+      </v-ons-list-title>
+
+      <v-ons-list modifier="material">
+        <v-ons-list-header class="table-head">
+          <div class="left">
+            SettingName
           </div>
-          <input type="checkbox">
-        </td>
-      </tr>
-    </table>
 
-  </section>
+          <div class="right">
+            Edit
+          </div>
+
+        </v-ons-list-header>
+        <app-table-item v-for="(singleDevice,key, index) in singleDevice"
+                        :singleDevice="singleDevice"
+                        v-bind:key="key"
+        ></app-table-item>
+
+      </v-ons-list>
+
+    </v-ons-list>
+  </v-ons-page>
+
 </template>
 
 <script>
+  import DashboardTableItem from './listitems/DashboardTableItem.vue';
+
   export default {
-    name: 'Home',
-    data() {
+    props:['device'],
+    data(){
       return {
-        msg: 'Welcome to the Dashboard page'
+          selectedItem:''
       }
+    },
+    computed: {
+      singleDevice() {
+        return this.$store.getters.singleDeviceData;
+      },
+      devices() {
+        return this.$store.getters.data;
+      },
+      listDevice(){
+        return this.$store.getters.singleDevice
+      }
+    },
+    methods: {
+      selectDevice(){
+        const selectedDeviceId = this.selectedItem;
+        this.$store.dispatch('selectedDevice', selectedDeviceId)
+      }
+    },
+    created() {
+      const selectedDeviceId = this.$store.getters.singleDevice;
+      this.selectedItem = this.$store.getters.singleDevice;
+      this.$store.dispatch('selectedDevice', selectedDeviceId)
+    },
+    components: {
+      appTableItem: DashboardTableItem
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .background {
+    background: #555; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(#555, #222); /* For Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#555, #222); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(#555, #222); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#555, #222); /* Standard syntax */
+  }
+
   #devices {
     background-color: #fff;
     border: none;
     font-weight: 100;
     color: #999;
-  }
-
-  #slidecontainer {
-    width: 100%;
-  }
-
-  input[type=range] {
-    -webkit-appearance: none;
-    background: transparent;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-  }
-
-  input[type=range]:focus {
-    outline: none;
-  }
-
-  input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 11px;
-    cursor: pointer;
-    background: #E0E0E0;
-    border-radius: 6px;
-    border: 1px solid #555;
-  }
-
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    border: 2px solid deepskyblue;
-    background: #ffffff;
-    cursor: pointer;
-    margin-top: -5px;
   }
 
   .dashboard-container {
@@ -111,24 +115,32 @@
     background-color: transparent;
   }
 
+  .select-bar {
+    background-color:#fff;
+    padding:2px;
+    font-weight:bold;
+    font-size:small;
+    color:#777;
+  }
   .dashboard-header {
-    margin-top: 3px;
     display: flex;
     background-color: deepskyblue;
     align-items: center;
     justify-content: space-between;
+    padding: 10px;
   }
 
   .icon {
     margin-left: 10px;
     margin-right: 5px;
     color: #fff;
+    font-size: 20px;
   }
 
   .bulk-edit {
     color: #fff;
     background: deepskyblue;
-    border: 2px solid #fff;
+    border: 3px solid #fff;
     align-self: center;
     flex-wrap: wrap;
   }
@@ -153,17 +165,4 @@
     padding: 0 10px 0 10px;
   }
 
-  .table-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px 0 10px;
-    background-color: #fff;
-  }
-
-  .edit {
-    display: flex;
-    align-items: center;
-  }
 </style>
-

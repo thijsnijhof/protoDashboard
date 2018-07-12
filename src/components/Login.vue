@@ -1,13 +1,16 @@
-<template>
+<template >
+  <v-ons-page>
+    <div class="background"></div>
   <div class="container">
-    <form @submit.prevent="onSubmit({username, password})" class="login-container">
+    <form @submit.prevent="onSubmit({username, password})" class="login-container" ref="indexform" id="indexform">
       <h1>LOGIN</h1>
       <hr>
-      <input class="login-input" type="text" v-model="username" placeholder="Username">
-      <input type="password" class="login-input" v-model="password" placeholder="Password">
+      <v-ons-input type="text" v-model="username" placeholder="Username" modifier="material"></v-ons-input>
+      <v-ons-input type="password" v-model="password" placeholder="Password" modifier="material"></v-ons-input>
       <button type="submit" class="login-button">LOGIN</button>
     </form>
   </div>
+  </v-ons-page>
 </template>
 
 <script>
@@ -26,6 +29,7 @@
           password: this.password,
         };
         // dispatches the login action from the store
+//        this.$store.dispatch('navigator/login', {username: formData.username, password: formData.password})
         this.$store.dispatch('login', {username: formData.username, password: formData.password})
       }
     }
@@ -34,6 +38,13 @@
 </script>
 
 <style scoped>
+  .background {
+    background: #555; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(#555, #222); /* For Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#555, #222); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(#555, #222); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#555, #222); /* Standard syntax */
+  }
   h1 {
     font-size: large;
   }
@@ -51,6 +62,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height:100%;
   }
 
   .login-container {
