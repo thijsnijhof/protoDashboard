@@ -416,8 +416,7 @@
       appCheckbox: Checkbox
     },
     methods: {
-      confirmRandom(){
-        this.singleDevice.value = this.selectedRandom;
+      confirmAction(){
         let changedVal = {val: this.singleDevice};
         console.log('changedVal: ', changedVal);
         this.$store.dispatch('editSetting', {
@@ -425,141 +424,55 @@
           value: changedVal.val.value,
           key: changedVal.val.key
         });
-        this.singleDevice.value = changedVal.val.value;
         this.onEdit = false;
-        this.edited='color:green'
+        this.edited='color:green';
+      },
+      confirmRandom(){
+        this.singleDevice.value = this.selectedRandom;
+        this.confirmAction();
       },
       confirmEffectMode(){
         this.singleDevice.value = this.selectedEffectMode;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmAutoRandom(){
         this.singleDevice.value = this.selectedAutoRandom;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmAutoRandomEvery(){
         this.singleDevice.value = this.selectedAutoRandomEvery;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmTimer(){
         this.singleDevice.value = this.selectedTimer;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmMasterSlaveMode() {
         this.singleDevice.value = this.selectedMasterSlaveMode;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmAppMode() {
         this.singleDevice.value = this.selectedAppMode;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmButtonPin() {
         this.singleDevice.value = this.selectedButtonPin;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.singleDevice.value = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmWifi() {
         this.singleDevice.value = this.selectedWifiMode;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.selectedWifiMode = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmNumValue() {
         this.singleDevice.value = this.editNum;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.editNum = changedVal.val.value;
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmTextValue() {
         this.singleDevice.value = this.editText;
-        let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.editText = '';
-        this.onEdit = false;
-        this.edited='color:green'
+        this.confirmAction();
       },
       confirmBoolValue() {
+//        Convert true or false to 1 or 0
         let bool = this.singleDevice.value ? '1' : '0';
         let changedVal = {val: this.singleDevice};
         console.log('changedVal: ', changedVal, 'bool: ', bool);
@@ -570,17 +483,6 @@
         this.onEdit = false;
         this.edited='color:green'
       },
-      editValue() {
-        let changedVal = {val: this.singleDevice};
-        console.log(changedVal.val.name);
-        this.$store.dispatch('editSetting', {
-          name: changedVal.val.name,
-          value: changedVal.val.value,
-          key: changedVal.val.key
-        });
-        this.onEdit = false;
-        this.edited='color:green'
-      }
     },
 
   }
@@ -589,13 +491,11 @@
 <style scoped>
   .list-item-bg {
     background: #fff;
-    /*border-top:1px solid #bdbdbd;*/
   }
 
   .list-header-bg {
     background: #e4f8f1;
     padding: 10px;
-    /*border-top:1px solid #bdbdbd;*/
     display: flex;
     justify-content: space-between;
   }
@@ -608,19 +508,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-
-  .table-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px 0 10px;
-    background-color: #fff;
-  }
-
-  .edit {
-    display: flex;
-    align-items: center;
   }
 
   .insert {
