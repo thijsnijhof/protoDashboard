@@ -1,26 +1,47 @@
 <template>
-  <div class="checkboxContainer">
-    <label for="true">True</label>
-    <input type="radio" id="true" v-model="toggle" value="1">
-    <label for="false">False</label>
-    <input type="radio" id="false" v-model="toggle" value="0">
-    {{toggle}}
+  <!--USEVOLTSENSE-->
+  <div class="text-input-wrapper">
+    <v-ons-switch v-model="singleDevice.value">
+                  <!--v-if="singleDevice.name === 'useVoltSense'"-->
+    </v-ons-switch>
+    <v-ons-button v-on:click="confirmBoolValue()"
+                  v-if="singleDevice.name === 'useVoltSense'"
+                  modifier="outline">update
+    </v-ons-button>
   </div>
 </template>
 
 <script>
   export default {
     props:['singleDevice'],
-      data(){
-          return {
-            toggle  :0
-          }
+    data(){
+      return {
+        edited:'color:#777',
       }
+    },
+    created(){
+      console.log('created: ', this.singleDevice);
+    },
+    methods: {
+      confirmBoolValue() {
+        let bool = this.singleDevice.value ? '1' : '0';
+        let changedVal = {val: this.singleDevice};
+        console.log('changedVal: ', changedVal, 'bool: ', bool);
+        this.$store.dispatch('editSetting', {
+          name: changedVal.val.name,
+          value: bool,
+          key: changedVal.val.key});
+        this.onEdit = false;
+        this.edited='color:green'
+      },
+    }
   }
 </script>
 
 <style scoped>
-  .checkboxContainer {
+  .text-input-wrapper {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
   }
 </style>

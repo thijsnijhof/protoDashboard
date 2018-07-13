@@ -51,7 +51,6 @@ Vue.component(VOnsSelect.name, VOnsSelect);
 // import store and router and inject them in the root instance
 // they can now be accessed with $store and $router
 import router from './router'
-// TRY FOR ONSEN NAVIGATOR
 // import  store from './store/store';
 import  {store} from './store/store';
 

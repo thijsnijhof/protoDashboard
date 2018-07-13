@@ -1,11 +1,8 @@
 <template>
-  <!--<section>-->
-  <!--<h1>AVAILABLE DEVICES</h1>-->
-  <!--<h1>{{$route.name}}</h1>-->
-  <!--<button @click="onLogout"><i class="fa fa-power-off icon" aria-hidden="true"></i>LOGOUT</button>-->
-  <!--</section>-->
   <v-ons-toolbar modifier="material" class="header-toolbar">
-    <div class="left title">Devices</div>
+    <div class="left title">
+      <v-ons-button v-if="$route.name === 'Dashboard'" modifier="quiet" @click="onBack" ripple><i class="fa fa-chevron-left icon" aria-hidden="true"></i></v-ons-button>
+    </div>
     <div class="center title">
       {{$route.name}}
     </div>
@@ -16,10 +13,17 @@
 </template>
 
 <script>
+  import router from '../../router';
+
   export default {
     methods: {
       onLogout() {
         this.$store.dispatch('logout')
+      },
+      onBack(){
+        if(this.$route.name === 'Dashboard'){
+          router.push('/home')
+        }
       }
     }
   }
