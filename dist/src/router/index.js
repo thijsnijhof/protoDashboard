@@ -77,5 +77,6 @@ var routes = [{
   component: _Dashboard2.default
 }];
 
-exports.default = new _vueRouter2.default({ mode: 'history', routes: routes });
+// export default new VueRouter({mode: 'history', routes})
+exports.default = new _vueRouter2.default(routes);
 //# sourceMappingURL=index.js.map
