@@ -31,52 +31,42 @@ var _store2 = _interopRequireDefault(_store);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
-// TRYOUT ONS NAVIGATOR
-// declare the different route paths
-// const router= new VueRouter({
-//   mode:'history',
-//    routes : [
-//     {
-//       path: '/home',
-//       name: 'Home',
-//       component: Home
-//     },
-//     {
-//       path: '/',
-//       name: 'Login',
-//       component: Login
-//     },
-//     {
-//       path: '/dashboard',
-//       name: 'Dashboard',
-//       component: Dashboard
-//     }
-//   ]
-// });
 
-// router.beforeEach((to, from, next) => {
-// Reset pageStack to the new route
-//   store.commit('navigator/reset', to.matched.map(m => m.components.default));
-//   next();
-// });
+exports.default = new _vueRouter2.default({
+  routes: [{
+    path: '/home',
+    name: 'Home',
+    component: _Home2.default
+  }, {
+    path: '/',
+    name: 'Login',
+    component: _Login2.default
+  }, {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: _Dashboard2.default
+  }]
+});
 
-// export default new VueRouter({mode: 'history', routes})
-// export default router;
 // OLD ROUTER VIEW
-var routes = [{
-  path: '/home',
-  name: 'Home',
-  component: _Home2.default
-}, {
-  path: '/',
-  name: 'Login',
-  component: _Login2.default
-}, {
-  path: '/dashboard',
-  name: 'Dashboard',
-  component: _Dashboard2.default
-}];
-
-// export default new VueRouter({mode: 'history', routes})
-exports.default = new _vueRouter2.default(routes);
+// const routes = [
+//   {
+//     path: '/home',
+//     name: 'Home',
+//     component: Home
+//   },
+//   {
+//     path: '/',
+//     name: 'Login',
+//     component: Login
+//   },
+//   {
+//     path: '/dashboard',
+//     name: 'Dashboard',
+//     component: Dashboard
+//   }
+// ]
+//
+// // export default new VueRouter({mode: 'history', routes})
+// export default new VueRouter(routes)
 //# sourceMappingURL=index.js.map
