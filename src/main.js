@@ -7,6 +7,9 @@ import App from './App'
 // import 'onsenui/dist/css/onsen-css-components.css';
 // import 'onsenui';
 
+import Vuelidate from 'vuelidate';
+
+Vue.use(Vuelidate);
 
 // import Vue from 'vue';
 import VueOnsen from 'vue-onsenui/esm';

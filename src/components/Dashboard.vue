@@ -51,7 +51,7 @@
     data(){
       return {
           selectedItem:'',
-          selectedSet:'Master'
+          selectedSet:'MSTRSet'
       }
     },
     computed: {

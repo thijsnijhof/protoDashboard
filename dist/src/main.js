@@ -8,6 +8,10 @@ var _App = require('./App');
 
 var _App2 = _interopRequireDefault(_App);
 
+var _vuelidate = require('vuelidate');
+
+var _vuelidate2 = _interopRequireDefault(_vuelidate);
+
 var _esm = require('vue-onsenui/esm');
 
 var _esm2 = _interopRequireDefault(_esm);
@@ -80,12 +84,14 @@ var _store = require('./store/store');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_vue2.default.use(_vuelidate2.default);
+
+// import Vue from 'vue';
+
 // import 'onsenui/dist/css/onsenui.css';
 // import 'onsenui/dist/css/onsen-css-components.css';
 // import 'onsenui';
 
-
-// import Vue from 'vue';
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
