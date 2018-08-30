@@ -90,3 +90,10 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
   ]
 };
+
+if(process.env.NODE_ENV === 'test'){
+//  exclude npm deps from test bundle
+  module.exports.externals = [require('webpack-node-externals')()]
+//  use inline source map so it works with mocha webpack
+  module.exports.devtool = 'inline-cheap-module-source-map'
+}

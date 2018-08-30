@@ -1,6 +1,5 @@
 <template>
   <v-ons-page modifier="material">
-
     <v-ons-list modifier="material" infinite-scroll>
       <v-ons-list-title class="dashboard-header">
         <div class="left">

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/test/setup.js"],"names":["require","global","expect"],"mappings":";;AAAAA,QAAQ,cAAR;AACAC,OAAOC,MAAP,GAAgBF,QAAQ,QAAR,CAAhB","file":"setup.js","sourcesContent":["require('jsdom-global')()\nglobal.expect = require('expect')\n"]}
