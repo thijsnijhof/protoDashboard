@@ -26,5 +26,6 @@ exports.default = ["LocationName", //done
 "MinimumSaturation", //done
 "MaximumBrightness", //done
 "MinimumBrightness", // done
-"EffectMode", "EffectSpeed"];
+"EffectMode", "EffectSpeed", //done
+"NumberTwo", "NumberThree"];
 //# sourceMappingURL=usrArray.js.map

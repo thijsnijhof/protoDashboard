@@ -8,6 +8,14 @@ var _App = require('./App');
 
 var _App2 = _interopRequireDefault(_App);
 
+var _vueMoment = require('vue-moment');
+
+var _vueMoment2 = _interopRequireDefault(_vueMoment);
+
+var _momentTimezone = require('moment-timezone');
+
+var _momentTimezone2 = _interopRequireDefault(_momentTimezone);
+
 var _vuelidate = require('vuelidate');
 
 var _vuelidate2 = _interopRequireDefault(_vuelidate);
@@ -84,16 +92,17 @@ var _store = require('./store/store');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+
+_vue2.default.use(_vueMoment2.default, {
+  moment: _momentTimezone2.default
+});
+
 _vue2.default.use(_vuelidate2.default);
 
 // import Vue from 'vue';
 
-// import 'onsenui/dist/css/onsenui.css';
-// import 'onsenui/dist/css/onsen-css-components.css';
-// import 'onsenui';
-
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 _vue2.default.use(_esm2.default);
 _vue2.default.component(_VOnsPage2.default.name, _VOnsPage2.default);

@@ -50,8 +50,8 @@ var store = exports.store = new _vuex2.default.Store({
     data: {},
     singleDevice: {},
     singleDeviceData: [],
-    settingsArray: _settingsArray2.default,
     usrArray: _usrArray2.default,
+    settingsArray: _settingsArray2.default,
     selectedSet: 'MSTRSet',
     singleSetting: []
   },
@@ -77,7 +77,6 @@ var store = exports.store = new _vuex2.default.Store({
       // The userData is provided by the login action below
       state.accessToken = userData.token;
       state.isLoggedIn = true;
-      console.log(userData.token);
     },
     authChecked: function authChecked(state) {
       state.isLoggedIn = true;
@@ -86,18 +85,15 @@ var store = exports.store = new _vuex2.default.Store({
       _jsCookie2.default.remove('accessToken', 'userId', 'token');
       state.isLoggedIn = false;
       state.accessToken = '';
-      console.log(accessToken);
     },
     changeSet: function changeSet(state, selected) {
-      console.log('selected', selected);
       state.selectedSet = selected;
-      console.log(state.selectedSet);
+      console.log(state.singleDeviceData);
     },
     addDevices: function addDevices(state, newData) {
       // Store the data from the devices in the store
       // The newData is provided by the fetchDevices action
       state.data = newData;
-      console.log('state data ', state.data);
     },
     singleDevice: function singleDevice(state, device) {
       // This mutation is called by selectedDevice upon selecting a device in the Home component.
@@ -108,7 +104,6 @@ var store = exports.store = new _vuex2.default.Store({
       particle.getVariable({
         deviceId: state.singleDevice,
         name: 'get' + state.selectedSet,
-        // name: `getMSTRSet`,
         auth: state.accessToken
       }).then(function (data) {
         // After calling the getVariable method we get the response from the API on body.result
@@ -118,37 +113,26 @@ var store = exports.store = new _vuex2.default.Store({
         // The CSV string is a string with comma's between each word so: "str1,str2,str3,etc..."
         // Using (",") a comma as the argument will create a new substring between each word
         var deviceCSV = data.body.result;
-        console.log('devicecsv: ', deviceCSV);
         var deviceData = deviceCSV.split(",");
+        deviceData.pop();
         // To output the list on the Dashboard I want to have an array of objects
         // I made a second array which matches the array key names of the devices
         // The deviceData array has all the values. I will create a new array and combine it into an array of objects
         // This way I can set the values of each property and list them with name and value
         var combinedArray = [];
         var selectedArray = state.selectedSet === 'MSTRSet' ? _settingsArray2.default : _usrArray2.default;
-        // for (let result in deviceData) {
-        //   let key = settingsArray.indexOf(settingsArray[result]);
-        //   combinedArray.push({name: settingsArray[result], value: deviceData[result], key:key});
-        // }
-
         for (var result in deviceData) {
           var key = selectedArray.indexOf(selectedArray[result]);
-          combinedArray.push({ name: selectedArray[result], value: deviceData[result], key: key });
+          combinedArray.push({ name: selectedArray[result], value: deviceData[result].replace(/"/g, ''), key: key });
+          // combinedArray.push({name: selectedArray[result], value: deviceData[result], key:key});
         }
 
         // Set the state to the combinedArray so we can access the values in the Dashboard component
         state.singleDeviceData = combinedArray;
-        console.log('CombinedArray after is: ', combinedArray);
       });
     },
     editSingleSetting: function editSingleSetting(state, changedVal) {
       // Takes the edited setting and put it in the combinedArray
-      // Prev function
-      //   let newSettings = state.singleDeviceData;
-      //   newSettings[changedVal.key] = {name:changedVal.name,value:changedVal.value,key:changedVal.key};
-      //   console.log('new: ',newSettings);
-      //   state.singleSetting = newSettings;
-      //   console.log('singleSetting: ',state.singleSetting);
       var particle = new Particle();
       var arg = changedVal.key + ':' + changedVal.value;
       var fnPr = particle.callFunction({
@@ -174,7 +158,6 @@ var store = exports.store = new _vuex2.default.Store({
       var csvArray = allSettings.map(function (a) {
         return a.value;
       }).join(",");
-      console.log('csvarray: ', csvArray);
       // Call the setMSTRset function from the particle API
       // It takes the deviceId, name of the called function, an argument and the accessToken
       var fnPr = particle.callFunction({
@@ -225,7 +208,6 @@ var store = exports.store = new _vuex2.default.Store({
       })
       // commit the authUser mutation
       .then(function (res) {
-        console.log("res: ", res.body);
         commit('authUser', {
           token: res.body.access_token
         });
@@ -236,16 +218,6 @@ var store = exports.store = new _vuex2.default.Store({
         return console.log('failed to login', error);
       });
     },
-
-    // checkLogin(state){
-    //   console.log(state.accessToken)
-    //   if(state.accessToken !== ''){
-    //     console.log('AccessToken exists, logging in...');
-    //     router.push('/home')
-    //   } else {
-    //     router.push('/')
-    //   }
-    // },
     logout: function logout(_ref2, accessToken) {
       var commit = _ref2.commit;
 
@@ -264,7 +236,6 @@ var store = exports.store = new _vuex2.default.Store({
       // It takes the accesstoken from the store
       // The accesstoken is provided by the API upon logging in
       particle.listDevices({ auth: accessToken }).then(function (devices) {
-        console.log('Devices', devices);
         commit('addDevices', devices.body);
       }).catch(function (error) {
         return console.log('List devices failed ', error);
@@ -276,7 +247,6 @@ var store = exports.store = new _vuex2.default.Store({
     selectedDevice: function selectedDevice(_ref4, device) {
       var commit = _ref4.commit;
 
-      console.log('storeSelectedDevice: ', device);
       commit('singleDevice', device);
       _router2.default.push('/dashboard');
     },
@@ -284,7 +254,6 @@ var store = exports.store = new _vuex2.default.Store({
       var commit = _ref5.commit;
 
       // Action to edit a single setting in the singleDeviceData
-      console.log('storeEditSetting: ', changedVal);
       commit('editSingleSetting', changedVal);
     },
 
@@ -296,9 +265,10 @@ var store = exports.store = new _vuex2.default.Store({
       commit('saveAllSettings');
     },
     selectSet: function selectSet(_ref7, selected) {
-      var commit = _ref7.commit;
+      var commit = _ref7.commit,
+          state = _ref7.state;
 
-      commit('changeSet', selected);
+      commit('changeSet', selected, state);
     }
   }
 });

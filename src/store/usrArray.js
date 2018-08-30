@@ -28,4 +28,6 @@ export default [
   "MinimumBrightness",// done
   "EffectMode",
   "EffectSpeed", //done
+  "NumberTwo",
+  "NumberThree",
 ]

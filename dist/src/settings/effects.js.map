@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/settings/effects.js"],"names":["text","value"],"mappings":";;;;;kBAAe,CACb,EAACA,MAAM,KAAP,EAAcC,OAAO,CAArB,EADa,EAEb,EAACD,MAAM,SAAP,EAAkBC,OAAO,CAAzB,EAFa,C","file":"effects.js","sourcesContent":["export default [\n  {text: 'Off', value: 0},\n  {text: 'Default', value: 1},\n]\n"]}

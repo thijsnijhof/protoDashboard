@@ -2,6 +2,7 @@
   <v-ons-list modifier="material">
     <v-ons-list-header class="list-header-bg" :style="`${edited}`">
       {{singleDevice.name}}
+      {{singleDevice.value}}
       <!--<v-ons-checkbox id="checkbox" modifier="material" v-if="singleDevice.value !== ''"></v-ons-checkbox>-->
     </v-ons-list-header>
 
@@ -40,7 +41,10 @@
     <template v-if="singleDevice.name === 'useVoltSense'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <v-ons-switch v-model="singleDevice.value"></v-ons-switch>
+          <!--<v-ons-switch v-model="singleDevice.value" :true-value="'1'" :false-value="'0'"></v-ons-switch>-->
+          <v-ons-switch v-model="boolVal"></v-ons-switch>
+          <!--<p>{{singleDevice.value}}</p>-->
+          <p>{{boolVal}}</p>
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -51,7 +55,10 @@
     <template v-if="singleDevice.name === 'hasRockerSwitch'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <v-ons-switch v-model="singleDevice.value"></v-ons-switch>
+          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
+          <v-ons-switch v-model="boolVal"></v-ons-switch>
+          <p>{{boolVal}}</p>
+
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -61,7 +68,10 @@
     <template v-if="singleDevice.name === 'hasPushButton'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <v-ons-switch v-model="singleDevice.value"></v-ons-switch>
+          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
+          <v-ons-switch v-model="boolVal"></v-ons-switch>
+          <p>{{boolVal}}</p>
+
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -71,7 +81,10 @@
     <template v-if="singleDevice.name === 'hasPIRSensor'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <v-ons-switch v-model="singleDevice.value"></v-ons-switch>
+          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
+          <v-ons-switch v-model="boolVal"></v-ons-switch>
+          <p>{{boolVal}}</p>
+
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -81,7 +94,10 @@
     <template v-if="singleDevice.name === 'hasRTCBattery'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <v-ons-switch v-model="singleDevice.value"></v-ons-switch>
+          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
+          <v-ons-switch v-model="boolVal"></v-ons-switch>
+          <p>{{boolVal}}</p>
+
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -249,10 +265,10 @@
     <!-- -------- -->
     <!--LOCATION NAME-->
     <template v-if="singleDevice.name ==='LocationName'">
-      <v-ons-list-item class="list-item-bg">
-        <div class="text-input-wrapper">
-          <v-ons-input v-model="editText" @blur="$v.editText.$touch()" type="text" modifier="material" max="24"></v-ons-input>
-          <p v-if="!$v.editText.maxLen.max">
+      <v-ons-list-item class="list-item-bg" >
+        <div class="text-input-wrapper" >
+          <v-ons-input v-model="editText" @blur="$v.editText.$touch()" type="text" modifier="material" max="24" ></v-ons-input>
+          <p v-if="!$v.editText.maxLen">
             Please enter a maximum of {{$v.editText.$params.maxLen.max}} characters.
           </p>
           <v-ons-button v-on:click="confirmTextValue()" :disabled="$v.$invalid" modifier="outline">update</v-ons-button>
@@ -538,6 +554,30 @@
       </v-ons-list-item>
     </template>
 
+    <!--NumberTwo-->
+    <template v-if="singleDevice.name === 'NumberTwo'">
+      <v-ons-list-item class="list-item-bg">
+        <div class="text-input-wrapper">
+          <v-ons-input v-model="editNum" @blur="$v.editNum.$touch()" modifier="material" type="number" step="32" min="0" max="32767"></v-ons-input>
+          <p v-if="!$v.editNum.between">
+            Please enter a value between {{$v.editNum.$params.between.min}} and {{$v.editNum.$params.between.max}}
+          </p>
+          <v-ons-button v-on:click="confirmNumValue()" :disabled="$v.$invalid" modifier="outline">update</v-ons-button>
+        </div>
+      </v-ons-list-item>
+    </template>
+    <!--NumberThree-->
+    <template v-if="singleDevice.name === 'NumberThree'">
+      <v-ons-list-item class="list-item-bg">
+        <div class="text-input-wrapper">
+          <v-ons-input v-model="editNum" @blur="$v.editNum.$touch()" modifier="material" type="number" step="32" min="0" max="32767"></v-ons-input>
+          <p v-if="!$v.editNum.between">
+            Please enter a value between {{$v.editNum.$params.between.min}} and {{$v.editNum.$params.between.max}}
+          </p>
+          <v-ons-button v-on:click="confirmNumValue()" :disabled="$v.$invalid" modifier="outline">update</v-ons-button>
+        </div>
+      </v-ons-list-item>
+    </template>
     <!--TimeZone-->
     <!--Timer1-->
     <template v-if="singleDevice.name === 'Timer1'">
@@ -614,6 +654,17 @@
       </v-ons-list-item>
     </template>
 
+    <!--TimeZones-->
+    <template v-if="singleDevice.name === 'TimeZone'">
+      <v-ons-list-item class="list-item-bg">
+        <div class="text-input-wrapper">
+          <v-ons-select v-model="selectedTimeZone" modifier="material underbar">
+            <option v-for="timeZone in timeZones" :value="timeZone.value">{{ timeZone.text }}</option>
+          </v-ons-select>
+          <v-ons-button v-on:click="confirmTimeZone()" modifier="outline" ripple>update</v-ons-button>
+        </div>
+      </v-ons-list-item>
+    </template>
     <!--</transition>-->
   </v-ons-list>
 </template>
@@ -621,24 +672,24 @@
 <script>
   import InputSlider from './InputISlider.vue';
   import Checkbox from './Checkbox.vue';
-  import {
-    required,
-    email,
-    numeric,
-    minValue,
-    maxValue,
-    minLength,
-    maxLength,
-    sameAs,
-    requiredUnless,
-    between,
-  } from 'vuelidate/lib/validators'
+  import {required, email, numeric, minValue, maxValue, minLength, maxLength, sameAs, requiredUnless, between,} from 'vuelidate/lib/validators'
+  import wifiModes from '../../settings/wifiModes';
+  import effects from '../../settings/effects';
+  import appModes from '../../settings/appModes';
+  import masterSlaveModes from '../../settings/masterSlaveModes';
+  import buttonPins from '../../settings/buttonPins';
+  import timer from '../../settings/timer';
+  import randoms from '../../settings/randoms';
+  import autoRandoms from '../../settings/autoRandoms';
+  import autoRandomsEvery from '../../settings/autoRandomsEvery';
+  import timeZones from '../../settings/timeZones';
 
   export default {
     props: ['singleDevice'],
     data() {
       return {
         onEdit: false,
+        boolVal:this.singleDevice.value ? !!+"0" : !!+"1",
         edited: 'color:#777',
         editText: this.singleDevice.value,
         editNum: Number(this.singleDevice.value),
@@ -651,85 +702,18 @@
         selectedAppMode: Number(this.singleDevice.value),
         selectedWifiMode: Number(this.singleDevice.value),
         selectedMasterSlaveMode: Number(this.singleDevice.value),
+        selectedTimeZone: this.singleDevice.value,
         autoRandomText: '',
-        wifiModes: [
-          {text: 'Always On', value: 0},
-          {text: 'Off when sleeping', value: 1},
-          {text: 'Off after MiFi search', value: 2},
-          {text: 'Off after WiFi Direct', value: 3}
-        ],
-        effects: [
-          {text: 'Off', value: 0},
-          {text: 'Default', value: 1},
-        ],
-        appModes: [
-          {text: 'Open', value: 0},
-          {text: 'Closed', value: 1},
-          {text: 'Open Color', value: 2},
-          {text: 'Open Color and Brightness', value: 3}
-        ],
-        masterSlaveModes: [
-          {text: 'Test', value: 0},
-          {text: 'Burn In', value: 1},
-          {text: 'Standalone', value: 2},
-          {text: 'Master', value: 3},
-          {text: 'Slave-Sync-Color', value: 4},
-          {text: 'Slave-Sync-Complete', value: 5},
-          {text: 'Slave-Sync-Pattern', value: 6},
-        ],
-        buttonPins: [
-          {text: 'D0', value: 0},
-          {text: 'D1', value: 1},
-          {text: 'D2', value: 2},
-          {text: 'D3', value: 3},
-          {text: 'D4', value: 4},
-          {text: 'D5', value: 5},
-          {text: 'D6', value: 6},
-          {text: 'D7', value: 7},
-          {text: 'A0', value: 10},
-          {text: 'A1', value: 11},
-          {text: 'A2', value: 12},
-          {text: 'A3', value: 13},
-          {text: 'A4', value: 14},
-          {text: 'A5', value: 15},
-          {text: 'A6', value: 16},
-          {text: 'A7', value: 17},
-        ],
-        timer: [
-          {text: 'Off', value: 0},
-          {text: 'Everyday', value: 1},
-          {text: 'Weekdays Only', value: 2},
-          {text: 'Weekends Only', value: 3},
-        ],
-        randoms: [
-          {text: 'Hue and Harmony', value: 0},
-          {text: 'Only Warm Hues', value: 1},
-          {text: 'Only Cold Hues', value: 2},
-          {text: 'Hue Range', value: 3},
-          {text: 'Hue and Analogic Harmonies', value: 4},
-        ],
-        autoRandoms: [
-          {text: 'At Wake-up', value: 0},
-          {text: '1 Minute', value: 60},
-          {text: '5 Minutes', value: 300},
-          {text: '10 Minutes', value: 600},
-          {text: '20 Minutes', value: 1200},
-          {text: '30 Minutes', value: 1800},
-          {text: '1 Hour', value: 3600},
-          {text: '2 Hours', value: 7200},
-          {text: '4 Hours', value: 14400},
-        ],
-        autoRandomsEvery: [
-          {text: 'No Auto Random', value: 0},
-          {text: '1 Minute', value: 60},
-          {text: '5 Minutes', value: 300},
-          {text: '10 Minutes', value: 600},
-          {text: '20 Minutes', value: 1200},
-          {text: '30 Minutes', value: 1800},
-          {text: '1 Hour', value: 3600},
-          {text: '2 Hours', value: 7200},
-          {text: '4 Hours', value: 14400},
-        ],
+        wifiModes,
+        effects,
+        appModes,
+        masterSlaveModes,
+        buttonPins,
+        timer,
+        randoms,
+        autoRandoms,
+        autoRandomsEvery,
+        timeZones
       }
     },
     validations() {
@@ -786,6 +770,8 @@
           return {editNum: {required, numeric, between: between(0, 255)}};
           break;
         case 'EffectSpeed':
+        case 'NumberTwo':
+        case 'NumberThree':
           return {editNum: {required, numeric, between: between(0, 32767)}};
           break;
         case 'MainLocationName':
@@ -801,7 +787,7 @@
     methods: {
       confirmAction() {
         let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal);
+//        console.log('changedVal: ', changedVal);
         this.$store.dispatch('editSetting', {
           name: changedVal.val.name,
           value: changedVal.val.value,
@@ -809,6 +795,10 @@
         });
         this.onEdit = false;
         this.edited = 'color:green';
+      },
+      confirmTimeZone(){
+        this.singleDevice.value = this.selectedTimeZone;
+        this.confirmAction();
       },
       confirmRandom() {
         this.singleDevice.value = this.selectedRandom;
@@ -856,9 +846,10 @@
       },
       confirmBoolValue() {
 //        Convert true or false to 1 or 0
-        let bool = this.singleDevice.value ? '1' : '0';
+//        let bool = this.singleDevice.value ? '1' : '0';
+        let bool = this.boolVal ? '1' : '0';
         let changedVal = {val: this.singleDevice};
-        console.log('changedVal: ', changedVal, 'bool: ', bool);
+//        console.log('changedVal: ', changedVal, 'bool: ', bool);
         this.$store.dispatch('editSetting', {
           name: changedVal.val.name,
           value: bool,
@@ -868,7 +859,6 @@
         this.edited = 'color:green'
       },
     },
-
   }
 </script>
 
@@ -886,6 +876,19 @@
 
   .list-item-val-bg {
     background: #f7f7f7;
+  }
+
+  p {
+  color:red;
+    margin:0;
+    padding:0;
+    text-align:center;
+    justify-self:center;
+    align-self:center;
+  }
+
+  .invalid {
+    color:red;
   }
 
   .text-input-wrapper {

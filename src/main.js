@@ -3,9 +3,12 @@
 
 import Vue from 'vue'
 import App from './App'
-// import 'onsenui/dist/css/onsenui.css';
-// import 'onsenui/dist/css/onsen-css-components.css';
-// import 'onsenui';
+
+import VueMoment from 'vue-moment';
+import moment from 'moment-timezone';
+Vue.use(VueMoment, {
+  moment,
+});
 
 import Vuelidate from 'vuelidate';
 

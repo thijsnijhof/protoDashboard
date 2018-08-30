@@ -39,6 +39,7 @@
       </v-ons-list>
 
     </v-ons-list>
+    <span></span>
   </v-ons-page>
 
 </template>
@@ -51,7 +52,7 @@
     data(){
       return {
           selectedItem:'',
-          selectedSet:'MSTRSet'
+          selectedSet:'MSTRSet',
       }
     },
     computed: {
@@ -61,6 +62,9 @@
       devices() {
         return this.$store.getters.data;
       },
+      singleDeviceData(){
+        return this.$store.getters.singleDeviceData;
+      },
     },
     methods: {
       selectDevice(){
@@ -68,17 +72,25 @@
         this.$store.dispatch('selectedDevice', selectedDeviceId)
       },
       selectSet(){
-        const selectedSet = this.selectedSet;
-        console.log(selectedSet);
-        const selectedDeviceId = this.selectedItem;
-        this.$store.dispatch('selectSet',selectedSet);
-        this.$store.dispatch('selectedDevice', selectedDeviceId);
+        const selected = this.selectedSet;
+//        console.log(selectedSet);
+//        const selectedDeviceId = this.selectedItem;
+//        const selectedDeviceId =props.id;
+        this.$store.dispatch('selectSet',selected)
+          .then(this.selectDevice);
+//        this.selectedSet = this.$store.getters.selectedSet;
+//        this.$store.dispatch('selectedDevice', selectedDeviceId)
+//        this.selectDevice();
+
       }
     },
     created() {
       const selectedDeviceId = this.$store.getters.singleDevice;
+      this.selectedSet = this.$store.getters.selectedSet;
       this.selectedItem = this.$store.getters.singleDevice;
+      this.$store.dispatch('selectSet', this.selectedSet)
       this.$store.dispatch('selectedDevice', selectedDeviceId)
+
     },
     components: {
       appTableItem: DashboardTableItem
