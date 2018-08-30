@@ -54,8 +54,6 @@ export const store = new Vuex.Store({
     },
     changeSet(state,selected){
       state.selectedSet = selected;
-      console.log(state.singleDeviceData);
-
     },
     addDevices(state, newData) {
       // Store the data from the devices in the store
@@ -120,7 +118,6 @@ export const store = new Vuex.Store({
 
     },
     saveAllSettings(state) {
-      console.log('SaveAllSettings fired!...')
       const particle = new Particle();
       // Takes the final new array of objects
       const allSettings = state.singleSetting;

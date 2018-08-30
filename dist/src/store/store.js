@@ -88,7 +88,6 @@ var store = exports.store = new _vuex2.default.Store({
     },
     changeSet: function changeSet(state, selected) {
       state.selectedSet = selected;
-      console.log(state.singleDeviceData);
     },
     addDevices: function addDevices(state, newData) {
       // Store the data from the devices in the store
@@ -150,7 +149,6 @@ var store = exports.store = new _vuex2.default.Store({
       });
     },
     saveAllSettings: function saveAllSettings(state) {
-      console.log('SaveAllSettings fired!...');
       var particle = new Particle();
       // Takes the final new array of objects
       var allSettings = state.singleSetting;

@@ -2,7 +2,6 @@
   <v-ons-list modifier="material">
     <v-ons-list-header class="list-header-bg" :style="`${edited}`">
       {{singleDevice.name}}
-      {{singleDevice.value}}
       <!--<v-ons-checkbox id="checkbox" modifier="material" v-if="singleDevice.value !== ''"></v-ons-checkbox>-->
     </v-ons-list-header>
 
@@ -41,10 +40,7 @@
     <template v-if="singleDevice.name === 'useVoltSense'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <!--<v-ons-switch v-model="singleDevice.value" :true-value="'1'" :false-value="'0'"></v-ons-switch>-->
           <v-ons-switch v-model="boolVal"></v-ons-switch>
-          <!--<p>{{singleDevice.value}}</p>-->
-          <p>{{boolVal}}</p>
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -55,10 +51,7 @@
     <template v-if="singleDevice.name === 'hasRockerSwitch'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
           <v-ons-switch v-model="boolVal"></v-ons-switch>
-          <p>{{boolVal}}</p>
-
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -68,10 +61,7 @@
     <template v-if="singleDevice.name === 'hasPushButton'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
           <v-ons-switch v-model="boolVal"></v-ons-switch>
-          <p>{{boolVal}}</p>
-
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -81,10 +71,7 @@
     <template v-if="singleDevice.name === 'hasPIRSensor'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
           <v-ons-switch v-model="boolVal"></v-ons-switch>
-          <p>{{boolVal}}</p>
-
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -94,10 +81,7 @@
     <template v-if="singleDevice.name === 'hasRTCBattery'">
       <v-ons-list-item class="list-item-bg">
         <div class="text-input-wrapper">
-          <!--<v-ons-switch v-model="singleDevice.value"></v-ons-switch>-->
           <v-ons-switch v-model="boolVal"></v-ons-switch>
-          <p>{{boolVal}}</p>
-
           <v-ons-button v-on:click="confirmBoolValue()" modifier="outline">update</v-ons-button>
         </div>
       </v-ons-list-item>
@@ -787,7 +771,6 @@
     methods: {
       confirmAction() {
         let changedVal = {val: this.singleDevice};
-//        console.log('changedVal: ', changedVal);
         this.$store.dispatch('editSetting', {
           name: changedVal.val.name,
           value: changedVal.val.value,
@@ -846,10 +829,8 @@
       },
       confirmBoolValue() {
 //        Convert true or false to 1 or 0
-//        let bool = this.singleDevice.value ? '1' : '0';
         let bool = this.boolVal ? '1' : '0';
         let changedVal = {val: this.singleDevice};
-//        console.log('changedVal: ', changedVal, 'bool: ', bool);
         this.$store.dispatch('editSetting', {
           name: changedVal.val.name,
           value: bool,
