@@ -5,9 +5,6 @@ var utils = require('./utils');
 var config = require('../config');
 var vueLoaderConfig = require('./vue-loader.conf');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-// require('!style-loader!css-loader!./styles.css')
-// import 'css-loader'
-// import 'style-loader'
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -66,11 +63,8 @@ module.exports = {
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        use: [/* 'style-loader' */'css-loader', 'to-string-loader']
+        use: ['css-loader', 'to-string-loader']
       })
-      // test: /\.css$/,
-      // loader: 'css-loader!style-loader'
-
     }, {
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
       use: ['file-loader']

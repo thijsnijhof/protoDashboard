@@ -24,10 +24,6 @@ var _Dashboard = require('@/components/Dashboard');
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
-var _store = require('../store/store');
-
-var _store2 = _interopRequireDefault(_store);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);

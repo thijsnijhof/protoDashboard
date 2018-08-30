@@ -123,7 +123,6 @@ var store = exports.store = new _vuex2.default.Store({
         for (var result in deviceData) {
           var key = selectedArray.indexOf(selectedArray[result]);
           combinedArray.push({ name: selectedArray[result], value: deviceData[result].replace(/"/g, ''), key: key });
-          // combinedArray.push({name: selectedArray[result], value: deviceData[result], key:key});
         }
 
         // Set the state to the combinedArray so we can access the values in the Dashboard component
@@ -137,7 +136,6 @@ var store = exports.store = new _vuex2.default.Store({
       var fnPr = particle.callFunction({
         deviceId: state.singleDevice,
         name: 'set' + state.selectedSet,
-        // name:'setMSTRSet',
         argument: arg,
         auth: state.accessToken
       });

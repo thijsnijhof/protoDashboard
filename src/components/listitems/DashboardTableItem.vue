@@ -5,11 +5,6 @@
       <!--<v-ons-checkbox id="checkbox" modifier="material" v-if="singleDevice.value !== ''"></v-ons-checkbox>-->
     </v-ons-list-header>
 
-    <!--<v-ons-list-item class="list-item-val-bg">{{singleDevice.value}}</v-ons-list-item>-->
-
-    <!--<transition name="insert">-->
-    <!--<v-ons-list-item class="list-item-bg" v-if="onEdit">-->
-
     <!--PRODUCTRANGE-->
     <template v-if="singleDevice.name === 'ProductRange'">
       <v-ons-list-item class="list-item-bg">
@@ -649,7 +644,6 @@
         </div>
       </v-ons-list-item>
     </template>
-    <!--</transition>-->
   </v-ons-list>
 </template>
 

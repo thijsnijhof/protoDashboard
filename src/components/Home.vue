@@ -14,7 +14,6 @@
     },
     computed: {
       devices() {
-        console.log('getters data', this.$store.getters.data);
         return this.$store.getters.data;
       },
     },
